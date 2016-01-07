@@ -12,13 +12,13 @@
 <div class="page-header page-header-xs">
         <div class="page-header-content">
                 <div class="page-title">
-                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Fichas de verificação</span></h4>
+                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"> Fichas de verificação</span></h4>
                 </div>
         </div>
 
         <div class="breadcrumb-line">
                 <ul class="breadcrumb">
-                        <li><a href="index.html"><i class="icon-home2 position-left"></i> Fichas de verificação</a></li>
+                        <li><?php echo $this->Html->link('<i class="icon-stack3 position-left"></i> Fichas de verificação', array('action' => 'index'), array('escape' => false)); ?></li>
                 </ul>
         </div>
 </div>
@@ -85,9 +85,7 @@
 
 
         <!-- Footer -->
-        <div class="footer text-muted">
-                &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
-        </div>
+        <?php echo $this->element('footer'); ?>
         <!-- /footer -->
 
 </div>

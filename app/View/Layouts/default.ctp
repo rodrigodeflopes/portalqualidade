@@ -91,10 +91,9 @@
                                                 </a>
 
                                                 <ul class="dropdown-menu dropdown-menu-right">
-                                                        <li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
+                                                        <li><?php echo $this->Html->link('<i class="icon-user-plus"></i> Minha conta', array('controller' => 'users', 'action' => 'myaccount', $this->Session->read('Auth.User.id')), array('escape' => false)); ?></li>
                                                         <li class="divider"></li>
-                                                        <li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
-                                                        <li><a href="#"><i class="icon-switch2"></i> Logout</a></li>
+                                                        <li><?php echo $this->Html->link('<i class="icon-switch2"></i> Logout', array('controller' => 'users', 'action' => 'logout'), array('escape' => false)); ?></li>
                                                 </ul>
                                         </li>
                                 </ul>
@@ -142,24 +141,26 @@
                                                 <div class="sidebar-category sidebar-category-visible">
                                                         <div class="category-content no-padding">
                                                                 <ul class="navigation navigation-main navigation-accordion">
+                                                                    
+                                                                        <?php if(!$this->Session->read('enterpriseId')){ $menuClass = 'disabled'; }else{ $menuClass = ''; } ?>
 
                                                                         <!-- Principal -->
                                                                         <li class="navigation-header"><span>Principal</span> <i class="icon-menu" title="Main pages"></i></li>
-                                                                        <li><?php echo $this->Html->link('<i class="icon-people"></i> <span>Usuários</span>', array('controller' => 'users', 'action' => 'index'), array('escape' => false)); ?></li>
-                                                                        <li><?php echo $this->Html->link('<i class="icon-tablet"></i> <span>Dispositivos</span>', array('controller' => 'devices', 'action' => 'index'), array('escape' => false)); ?></li>
+                                                                            <li><?php echo $this->Html->link('<i class="icon-people"></i> <span>Usuários</span>', array('controller' => 'users', 'action' => 'index'), array('escape' => false)); ?></li>
+                                                                            <li><?php echo $this->Html->link('<i class="icon-tablet"></i> <span>Dispositivos</span>', array('controller' => 'devices', 'action' => 'index'), array('escape' => false)); ?></li>
                                                                         <!-- /Principal -->
 
                                                                         <!-- Obras -->
                                                                         <li class="navigation-header"><span>Obras</span> <i class="icon-menu" title="Forms"></i></li>   
-                                                                        <li><?php echo $this->Html->link('<i class="icon-home4"></i> <span>Obras</span>', array('controller' => 'enterprises', 'action' => 'index'), array('escape' => false)); ?></li>
-                                                                        <li><?php echo $this->Html->link('<i class="icon-stack3"></i> <span>FVS</span>', array('controller' => 'checks', 'action' => 'index'), array('escape' => false)); ?></li>
-                                                                        <li><?php echo $this->Html->link('<i class="icon-filter3"></i> <span>Filtro</span>', array('controller' => 'items', 'action' => 'research'), array('escape' => false)); ?></li>
+                                                                            <li><?php echo $this->Html->link('<i class="icon-home4"></i> <span>Obras</span>', array('controller' => 'enterprises', 'action' => 'index'), array('escape' => false)); ?></li>
+                                                                            <li class="<?php echo $menuClass; ?>"><?php echo $this->Html->link('<i class="icon-stack3"></i> <span>FVS</span>', array('controller' => 'checks', 'action' => 'index'), array('escape' => false)); ?></li>
+                                                                            <li class="<?php echo $menuClass; ?>"><?php echo $this->Html->link('<i class="icon-filter3"></i> <span>Filtro</span>', array('controller' => 'items', 'action' => 'research'), array('escape' => false)); ?></li>
                                                                         <!-- /Obras -->
                                                                         
                                                                         <!-- Sincronizar -->
                                                                         <li class="navigation-header"><span>Sincronizar</span> <i class="icon-menu" title="Forms"></i></li>   
-                                                                        <li><?php echo $this->Html->link('<i class="icon-upload"></i> <span>Exportar itens</span>', array('controller' => 'items', 'action' => 'index'), array('escape' => false)); ?></li>
-                                                                        <li><?php echo $this->Html->link('<i class="icon-transmission"></i> <span>Transferências</span>', array('controller' => 'transfers', 'action' => 'index'), array('escape' => false)); ?></li>
+                                                                            <li class="<?php echo $menuClass; ?>"><?php echo $this->Html->link('<i class="icon-upload"></i> <span>Exportar itens</span>', array('controller' => 'items', 'action' => 'index'), array('escape' => false)); ?></li>
+                                                                            <li class="<?php echo $menuClass; ?>"><?php echo $this->Html->link('<i class="icon-transmission"></i> <span>Transferências</span>', array('controller' => 'transfers', 'action' => 'index'), array('escape' => false)); ?></li>
                                                                         <!-- /Sincronizar -->
 
                                                                 </ul>

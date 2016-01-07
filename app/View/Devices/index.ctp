@@ -13,7 +13,7 @@
 <div class="page-header page-header-xs">
         <div class="page-header-content">
                 <div class="page-title">
-                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Dispositivos</span></h4>
+                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"> Dispositivos</span></h4>
                 </div>
 
                 <div class="heading-elements">
@@ -25,7 +25,7 @@
 
         <div class="breadcrumb-line">
                 <ul class="breadcrumb">
-                        <li><a href="index.html"><i class="icon-home2 position-left"></i> Dispositivos</a></li>
+                        <li><?php echo $this->Html->link('<i class="icon-tablet position-left"></i> Dispositivos', array('action' => 'index'), array('escape' => false)); ?></li>
                 </ul>
         </div>
 </div>
@@ -96,9 +96,7 @@
         <!-- /basic datatable -->
 
         <!-- Footer -->
-        <div class="footer text-muted">
-                &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
-        </div>
+        <?php echo $this->element('footer'); ?>
         <!-- /footer -->
 
 </div>
@@ -115,9 +113,9 @@
 
                         <div class="modal-body">
                                 <div class="alert alert-info alert-styled-left text-blue-800 content-group">
-                        <span class="text-semibold">Here we go!</span> Example of an alert inside modal.
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                    </div>
+                                    <span class="text-semibold">Here we go!</span> Example of an alert inside modal.
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                </div>
 
                                 <h6 class="text-semibold"><i class="icon-law position-left"></i> Habilitar novo dispositivo</h6>
                                 <p>Para habilitar utilize o leitor de Qr-code do aplicativo instalado no dispositivo.</p>

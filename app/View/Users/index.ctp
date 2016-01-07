@@ -10,7 +10,7 @@
         <div class="page-header page-header-xs">
                 <div class="page-header-content">
                         <div class="page-title">
-                                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Usuários</span></h4>
+                                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"> Usuários</span></h4>
                         </div>
 
                         <div class="heading-elements">
@@ -22,7 +22,7 @@
 
                 <div class="breadcrumb-line">
                         <ul class="breadcrumb">
-                                <li><a href="index.html"><i class="icon-home2 position-left"></i> Usuários</a></li>
+                                <li><?php echo $this->Html->link('<i class="icon-people position-left"></i> Usuários', array('action' => 'index'), array('escape' => false)); ?></li>
                         </ul>
                 </div>
         </div>

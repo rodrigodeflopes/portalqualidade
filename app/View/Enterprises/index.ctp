@@ -30,7 +30,7 @@
         <!-- Basic thumbnails -->
         <h6 class="content-group text-semibold">
                 Obras ativas
-                <small class="display-block">Atualmente existem X obras disponíveis para sua contribuição</small>
+                <small class="display-block">Atualmente existem <span class="text-bold"><?php echo count($enterprises); ?></span> obras disponíveis para sua contribuição</small>
         </h6>
 
         <div class="row">
@@ -38,7 +38,7 @@
                         <div class="col-md-4">
                                 <div class="panel panel-flat">
                                         <div class="panel-heading">
-                                                <h4 class="panel-title"><?php echo $this->Html->link($enterprise['Enterprise']['name'], array('action' => 'view', $enterprise['Enterprise']['id'])); ?></h4>
+                                                <h4><?php echo $this->Html->link($enterprise['Enterprise']['name'], array('action' => 'view', $enterprise['Enterprise']['id'])); ?></h4>
                                                 <div class="heading-elements">
                                                         <ul class="icons-list">
                                                                 <li><a data-action="collapse"></a></li>
@@ -49,11 +49,10 @@
                                         </div>
 
                                         <div class="panel-body">
-                                                <p>Extend thumb with simple zoomable. The icon is inserted directly in HTML and can be easily changed.</p>
-
+                                                <p><?php echo $enterprise['Enterprise']['description']; ?></p>
                                                 <div class="thumbnail">
                                                         <div class="thumb">
-                                                                <a href="<?php echo $enterprise['Enterprise']['image_path']; ?>" data-popup="lightbox">
+                                                                <a href="<?php echo Router::url('/',true) . $enterprise['Enterprise']['image_path']; ?>" data-popup="lightbox">
                                                                         <?php echo $this->Html->image($enterprise['Enterprise']['image_path'], array('style' => 'width: 800px; height:340px')); ?>
                                                                         <span class="zoom-image"><i class="icon-plus2"></i></span>
                                                                 </a>

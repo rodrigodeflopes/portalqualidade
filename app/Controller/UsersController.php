@@ -346,6 +346,7 @@ class UsersController extends AppController {
  */        
         public function logout() { 
                 //$this->Session->setFlash('Usuário desconectado!','alert_success'); 
+                $this->Session->destroy();
                 $this->redirect($this->Auth->logout()); 
         } 
         

@@ -28,7 +28,7 @@
 
         <div class="breadcrumb-line">
                 <ul class="breadcrumb">
-                        <li><a href="index.html"><i class="icon-home2 position-left"></i> Filtro</a></li>
+                        <li><?php echo $this->Html->link('<i class="icon-filter3 position-left"></i> Filtro', array('action' => 'index'), array('escape' => false)); ?></li>
                 </ul>
         </div>
 </div>
@@ -168,7 +168,7 @@
                         <div class="modal-content">
                                 <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h5 class="modal-title">Large modal</h5>
+                                        <h5 class="modal-title">Fotos registradas</h5>
                                 </div>
 
                                 <div class="modal-body">
@@ -200,9 +200,7 @@
         <!-- /Photo modal -->
 
         <!-- Footer -->
-        <div class="footer text-muted">
-                &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
-        </div>
+        <?php echo $this->element('footer'); ?>
         <!-- /footer -->
 
 </div>

@@ -162,4 +162,44 @@ class EnterprisesController extends AppController {
                     }
                 }
         }
+
+/*
+ *
+ * grafDataSource method
+ *
+ */
+        public function grafDataSource() {
+            $this->autoRender = false;
+            
+            $services = $this->Enterprise->query("  
+                SELECT Service.name, Item.total
+                FROM services AS Service
+                LEFT JOIN ( 
+                    SELECT Item.service_id, count(Item.id) as total
+                    FROM items AS Item     
+                    GROUP BY Item.service_id
+                ) as Item
+                ON Item.service_id = Service.id                                                  
+                WHERE Service.enterprise_id = " . $this->Session->read('enterpriseId') . "
+            ");
+            //debug($services);
+            
+            $legends = array();
+            $series = array();
+            foreach ($services as $service):                 
+                $legends[] = $service['Service']['name'];
+                $series[] = array(
+                    'value' => $service['Item']['total'],
+                    'name' => $service['Service']['name']
+                );
+            endforeach;  
+            $data = array( 
+                'legends' => $legends,
+                'series' => $series 
+            );
+            //debug($data);
+            
+            echo json_encode($data);             
+        }    
+        
 }
