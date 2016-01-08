@@ -200,6 +200,7 @@ class EnterprisesController extends AppController {
             //debug($data);
             
             echo json_encode($data);             
-        }    
+        } 
+
         
 }

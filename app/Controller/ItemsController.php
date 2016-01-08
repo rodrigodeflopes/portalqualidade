@@ -174,9 +174,10 @@ class ItemsController extends AppController {
             
             //lista de Itens
             //OBS.  o containable só funciona se colocado (public $actsAs = array('Containable'); em appModel.
-            $items = $this->Item->find('all', array(      
+            $items = $this->Item->find('all', array(    
+                'recursive' => -2,
                 'contain' => array(
-                    'Tower',  
+                    'Tower.Townhouse', 
                     'Location1',
                     'Location2',
                     'Location3',
@@ -187,13 +188,16 @@ class ItemsController extends AppController {
                     )
                 ),
                 'conditions' => $conditions,
-                'limit' => 2000
+                'limit' => 1500
             ));
             //debug($items);
             
             
             $result = array();     
-            foreach($items as $item) {       
+            foreach($items as $item) {   
+                
+                $EnterpriseTownhouse = "<div class='text-semibold'<h6>" . $item['Tower']['Townhouse']['name'] . "</h6></div><div class='text-muted'>" . $item['Tower']['name'] . "</div>";
+                
                 //Verificar o tipo medido.                                    
                 if($item['Item']['lastChecked'] === '1'){
                     $checked = '<i class="icon-thumbs-up3 text-success"></i>';
@@ -206,6 +210,7 @@ class ItemsController extends AppController {
                 $photo = (Set::check($item, 'Photo.0') ? "<a data-toggle='modal' data-target='#modal_photo' onclick='getPhoto(" . $item['Item']['id'] . ")'><i class='icon-camera'></i></a>" : "");
                          
                 $result[] = array(
+                    $EnterpriseTownhouse, 
                     $item['Location1']['name'], 
                     $item['Location2']['name'], 
                     $item['Location3']['name'], 
@@ -464,5 +469,16 @@ class ItemsController extends AppController {
             $header = array( 'Bloco' ,'Pavimento', 'Apto./Hall', 'Outros', 'Serviço', 'Vefificação');
             $this->Export->exportCsv($header, $newData,'','',';');
         }
+        
+/*
+ *
+ * Import method
+ *
+ */
+        public function import() {
+            
+            
+            
+        }  
         
 }

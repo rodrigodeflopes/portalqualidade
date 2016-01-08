@@ -35,7 +35,7 @@
 
         <div class="row">
                 <?php foreach ($enterprises as $enterprise): ?>
-                        <div class="col-md-4">
+                        <div style="width:360px; margin-left: 20px;" class="pull-left">
                                 <div class="panel panel-flat">
                                         <div class="panel-heading">
                                                 <h4><?php echo $this->Html->link($enterprise['Enterprise']['name'], array('action' => 'view', $enterprise['Enterprise']['id'])); ?></h4>
@@ -43,7 +43,6 @@
                                                         <ul class="icons-list">
                                                                 <li><a data-action="collapse"></a></li>
                                                                 <li><a data-action="reload"></a></li>
-                                                                <li><a data-action="close"></a></li>
                                                         </ul>
                                                 </div>
                                         </div>
@@ -53,7 +52,7 @@
                                                 <div class="thumbnail">
                                                         <div class="thumb">
                                                                 <a href="<?php echo Router::url('/',true) . $enterprise['Enterprise']['image_path']; ?>" data-popup="lightbox">
-                                                                        <?php echo $this->Html->image($enterprise['Enterprise']['image_path'], array('style' => 'width: 800px; height:340px')); ?>
+                                                                        <?php echo $this->Html->image($enterprise['Enterprise']['image_path'], array('style' => ' height:240px')); ?>
                                                                         <span class="zoom-image"><i class="icon-plus2"></i></span>
                                                                 </a>
                                                         </div>

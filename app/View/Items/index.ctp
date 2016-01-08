@@ -17,7 +17,7 @@
 <div class="page-header page-header-xs">
         <div class="page-header-content">
                 <div class="page-title">
-                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"> Exportar itens</span></h4>
+                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"> Exportar</span></h4>
                 </div>
 
                 <div class="heading-elements">
@@ -31,7 +31,7 @@
 
         <div class="breadcrumb-line">
                 <ul class="breadcrumb">
-                        <li><?php echo $this->Html->link('<i class="icon-upload position-left"></i> Exportar itens', array('action' => 'index'), array('escape' => false)); ?></li>
+                        <li><?php echo $this->Html->link('<i class="icon-upload position-left"></i> Exportar', array('action' => 'index'), array('escape' => false)); ?></li>
                 </ul>
         </div>
 </div>
@@ -76,10 +76,11 @@
                 <table id="tableItems" class="table datatable-html">
                         <thead>
                                 <tr>
+                                    <th>Cond./Bloco</th>
                                     <th>Pavimento</th>
                                     <th>Apto/Hall</th>
                                     <th>Outros</th>
-                                    <th>Serviço</th>
+                                    <th>Serviço - FVS</th>
                                     <th>Verificação</th>
                                     <th>Verif.</th>
                                     <th>Foto</th>
@@ -107,9 +108,9 @@
 
                         <div class="modal-body">
                                 <div class="alert alert-info alert-styled-left text-blue-800 content-group">
-                        <span class="text-semibold">Here we go!</span> Example of an alert inside modal.
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                    </div>
+                                    <span class="text-semibold">Here we go!</span> Example of an alert inside modal.
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                </div>
 
                                 <h6 class="text-semibold"><i class="icon-law position-left"></i> Sample heading with icon</h6>
                                 <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
@@ -135,7 +136,7 @@
                         <div class="modal-content">
                                 <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h5 class="modal-title">Large modal</h5>
+                                        <h5 class="modal-title">Fotos registradas</h5>
                                 </div>
 
                                 <div class="modal-body">

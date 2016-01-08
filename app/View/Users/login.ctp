@@ -35,7 +35,7 @@
                                                 <div class="form-group">
                                                         <button type="submit" class="btn bg-blue btn-block">Login <i class="icon-circle-right2 position-right"></i></button>
                                                 </div>                                                
-                                                <img src="/portalqualidade/app/webroot/img/logo.jpg" width="40%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <img src="/portalqualidade/app/webroot/img/apis.jpg" width="40%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <img src="/portalqualidade/app/webroot/img/tecplaner.png" width="50%">
                                         </div>
                                 <?php echo $this->Form->end(); ?>

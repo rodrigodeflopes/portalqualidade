@@ -57,7 +57,7 @@
                                                 <td>#<?php echo h($check['Check']['id']); ?></i></td>
                                                 <td><h6 class="text-semibold"><i class="icon-stack3"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo h($check['Service']['code']) . ' - ' . h($check['Service']['name']); ?></h6></td>
                                                 <td>
-                                                    <div class="text-semibold"><h6><a><?php echo h($check['Check']['name']); ?></a></h6></div>
+                                                    <div class="text-semibold"><h6><?php echo h($check['Check']['name']); ?></h6></div>
                                                     <div class="text-muted"><?php echo h($check['Check']['method']); ?></div>
                                                 </td>
                                                 <td><?php echo h($this->Time->format('d/m/Y H:i:s', $check['Check']['created'])); ?></td>

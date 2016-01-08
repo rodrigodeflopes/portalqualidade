@@ -11,13 +11,6 @@
                 <div class="page-title">
                         <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Dados da obra</span></h4>
                 </div>
-
-                <div class="heading-elements">
-                        <div class="heading-btn-group">
-                                <a class="btn btn-link btn-float has-text" id="excelLink"><i class="icon-file-excel text-primary"></i> <span>Excel</span></a>
-                                <a class="btn btn-link btn-float has-text"><i class="icon-printer2 text-primary"></i> <span>Imprimir</span></a>
-                        </div>
-                </div>
         </div>
 
         <div class="breadcrumb-line">
@@ -33,6 +26,62 @@
 <!-- Content area -->
 <div class="content">    
         
+        <!-- Numbers -->
+        <div class="panel panel-flat">
+                <div class="panel-heading">
+                        <h6 class="panel-title">Numeros</h6>
+                        <div class="heading-elements">
+                                <span class="heading-text"><i class="icon-history text-warning position-left"></i> 08 Jan 16, 18:30</span>
+                        </div>
+                </div>
+
+                <div class="container-fluid">
+                        <div class="row text-center">
+                                <div class="col-md-2">
+                                        <div class="content-group">
+                                                <h6 class="text-semibold no-margin"><i class="icon-clipboard3 position-left text-slate"></i> 2,345</h6>
+                                                <span class="text-muted text-size-small">this week</span>
+                                        </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                        <div class="content-group">
+                                                <h6 class="text-semibold no-margin"><i class="icon-calendar3 position-left text-slate"></i> 3,568</h6>
+                                                <span class="text-muted text-size-small">this month</span>
+                                        </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                        <div class="content-group">
+                                                <h6 class="text-semibold no-margin"><i class="icon-comments position-left text-slate"></i> 32,693</h6>
+                                                <span class="text-muted text-size-small">all messages</span>
+                                        </div>
+                                </div>
+                                <div class="col-md-2">
+                                        <div class="content-group">
+                                                <h6 class="text-semibold no-margin"><i class="icon-clipboard3 position-left text-slate"></i> 2,345</h6>
+                                                <span class="text-muted text-size-small">this week</span>
+                                        </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                        <div class="content-group">
+                                                <h6 class="text-semibold no-margin"><i class="icon-calendar3 position-left text-slate"></i> 3,568</h6>
+                                                <span class="text-muted text-size-small">this month</span>
+                                        </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                        <div class="content-group">
+                                                <h6 class="text-semibold no-margin"><i class="icon-comments position-left text-slate"></i> 32,693</h6>
+                                                <span class="text-muted text-size-small">all messages</span>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <!-- Numbers -->
+        
         <!-- Multiple donut charts -->
         <div class="panel panel-flat">
                 <div class="panel-heading">
@@ -41,7 +90,6 @@
                                 <ul class="icons-list">
                                         <li><a data-action="collapse"></a></li>
                                         <li><a data-action="reload"></a></li>
-                                        <li><a data-action="close"></a></li>
                                 </ul>
                         </div>
                 </div>
@@ -65,7 +113,6 @@
                                                                 <ul class="icons-list">
                                                         <li><a data-action="collapse"></a></li>
                                                         <li><a data-action="reload"></a></li>
-                                                        <li><a data-action="close"></a></li>
                                                 </ul>
                                         </div>
                                 </div>
@@ -89,7 +136,6 @@
                                                 <ul class="icons-list">
                                         <li><a data-action="collapse"></a></li>
                                         <li><a data-action="reload"></a></li>
-                                        <li><a data-action="close"></a></li>
                                 </ul>
                         </div>
                                 </div>

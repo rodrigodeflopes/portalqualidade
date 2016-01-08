@@ -105,18 +105,3 @@ function inputDataTable(){
         ajax: "transfers/transfersFound/" + $('#townhouses').val() + '/' + $('#towers').val()
     });         
 }
-
-function qrcodeCreate(routerUrl){
-    
-    document.getElementById('qrcode').innerHTML = "";
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
-            width : 250,
-            height : 250
-    });
-    //qrcode.makeCode(result);
-    qrcode.makeCode(routerUrl + 'transfers/upload/');    
-}
-
-
-
-

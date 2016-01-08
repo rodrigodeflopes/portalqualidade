@@ -6,9 +6,6 @@
     '/assets/js/plugins/forms/styling/uniform.min',
     '/assets/js/plugins/notifications/pnotify.min',
     '/assets/js/plugins/forms/selects/bootstrap_multiselect',
-    
-    'assets/js/pages/form_checkboxes_radios',
-    //causando erro no modal, olhar!!!
         
     '/assets/js/pages/components_modals',
     '/assets/js/pages/transfersIndex',
@@ -25,7 +22,6 @@
 
                 <div class="heading-elements">
                         <div class="heading-btn-group">
-                                <a class="btn btn-link btn-float has-text" data-toggle="modal" data-target="#modal_sync" onclick="qrcodeCreate('<?php echo Router::url('/',true); ?>')"><i class="icon-qrcode text-primary"></i><span>Sincronizar</span></a>
                                 <a class="btn btn-link btn-float has-text" id="excelLink"><i class="icon-file-excel text-primary"></i> <span>Excel</span></a>
                                 <a class="btn btn-link btn-float has-text"><i class="icon-printer2 text-primary"></i> <span>Imprimir</span></a>
                         </div>
@@ -95,36 +91,3 @@
 
 </div>
 <!-- /content area -->
-
-<!-- sinc modal -->
-<div id="modal_sync" class="modal fade">
-        <div class="modal-dialog">
-                <div class="modal-content">
-                        <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h5 class="modal-title"><i class="icon-menu7"></i> &nbsp;Modal with icons</h5>
-                        </div>
-
-                        <div class="modal-body">
-                                <div class="alert alert-info alert-styled-left text-blue-800 content-group">
-                        <span class="text-semibold">Here we go!</span> Example of an alert inside modal.
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                    </div>
-
-                                <h6 class="text-semibold"><i class="icon-law position-left"></i> Sample heading with icon</h6>
-                                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-
-                                <hr>
-
-                                <div class="panel-body">
-                                        <div id="qrcode" style="position:relative; left:35%; margin-left:-50px;"> </div>                                        
-                                </div>
-                        </div>
-
-                        <div class="modal-footer">
-                                <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross"></i> Close</button>
-                        </div>
-                </div>
-        </div>
-</div>
-<!-- /sinc modal -->

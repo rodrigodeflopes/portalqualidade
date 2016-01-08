@@ -145,10 +145,11 @@
                                 <table id="tableItems" class="table datatable-itemsResearch">
                                         <thead>
                                                 <tr>
+                                                    <th>Cond./Bloco</th>
                                                     <th>Pavimento</th>
                                                     <th>Apto/Hall</th>
                                                     <th>Outros</th>
-                                                    <th>Serviço</th>
+                                                    <th>Serviço - FVS</th>
                                                     <th>Verificação</th>
                                                     <th>Verif.</th>
                                                     <th>Foto</th>

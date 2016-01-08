@@ -355,23 +355,20 @@ class TransfersController extends AppController {
         public function transfersFound() {
             
             $this->autoRender = false;
-            
-            //$conditions = array();
-            
-            //$conditions[] = array('Tower.townhouse_id' => 1);             
-            //debug($conditions);
-            //debug($this->request); 
-            
+                                    
             //lista de transferências
             $transfers = $this->Transfer->find('all', array(
                 'recursive' => 0,
             ));
-            //debug($transfers);
-            
+            //debug($transfers);            
             
             $result = array();     
             foreach($transfers as $transfer) {
-                $result[] = array($transfer['Device']['name'], $transfer['Tower']['name'], $transfer['Transfer']['created'], '<i class="icon-camera"></i>');                        
+                $result[] = array(
+                    $transfer['Device']['name'], 
+                    $transfer['Tower']['name'], 
+                    $transfer['Transfer']['created'], 
+                    '<i class="icon-camera"></i>');                        
             }        
             $result = array('draw' => 10, 'recordsTotal' => count($transfers), 'recordsFiltered' => count($transfers), 'data' => $result);     
             
