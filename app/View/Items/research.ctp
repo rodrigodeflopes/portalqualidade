@@ -80,12 +80,15 @@
                                                             <select id="loc2" multiple="multiple"></select>
                                                     </div>
                                             </div>
+                                            <!-- Loc3 
                                             <div class="form-group">
-                                                    <label><span class="text-semibold">Outros</label>
+                                                    <label><span class="text-semibold">Cômodo</label>
                                                     <div class="multi-select-full">
                                                             <select id="loc3" multiple="multiple"></select>
                                                     </div>
                                             </div>
+                                            /Loc3 -->
+                                            <hr>
                                             <div class="form-group">
                                                     <label><span class="text-semibold">Serviços</label>
                                                     <div class="multi-select-full">
@@ -105,7 +108,7 @@
                                                                         <div class="checkbox">
                                                                                 <label>
                                                                                         <input id="checked1" type="checkbox" class="styled">
-                                                                                        Verif. Conforme                                                                                       
+                                                                                        Conforme                                                                                       
                                                                                 </label>
                                                                                 <i class="icon-thumbs-up3 text-success pull-right"></i>
                                                                         </div>                                                                         
@@ -114,9 +117,18 @@
                                                                         <div class="checkbox">
                                                                                 <label>
                                                                                         <input id="checked2" type="checkbox" class="styled">
-                                                                                        Verif. Não Conforme                                                                                         
+                                                                                        Não Conforme                                                                                         
                                                                                 </label>
                                                                                 <i class="icon-thumbs-down3 text-danger pull-right"></i>
+                                                                        </div>                                                                         
+                                                                </li>	
+                                                                <li> 
+                                                                        <div class="checkbox">
+                                                                                <label>
+                                                                                        <input id="checked3" type="checkbox" class="styled">
+                                                                                        Não verificado                                                                                        
+                                                                                </label>
+                                                                                <i class="icon-eye-blocked pull-right"></i>
                                                                         </div>                                                                         
                                                                 </li>	
 							</ul>
@@ -148,10 +160,9 @@
                                                     <th>Cond./Bloco</th>
                                                     <th>Pavimento</th>
                                                     <th>Apto/Hall</th>
-                                                    <th>Outros</th>
                                                     <th>Serviço - FVS</th>
                                                     <th>Verificação</th>
-                                                    <th>Verif.</th>
+                                                    <th>Status</th>
                                                     <th>Foto</th>
                                                 </tr>
                                         </thead>
@@ -169,7 +180,7 @@
                         <div class="modal-content">
                                 <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h5 class="modal-title">Fotos registradas</h5>
+                                        <h5 class="modal-title"><i class="icon-camera position-left"></i>&nbsp;Fotos registradas</h5>
                                 </div>
 
                                 <div class="modal-body">
@@ -199,6 +210,27 @@
                 </div>
         </div>
         <!-- /Photo modal -->
+        
+        <!-- Note modal -->
+        <div id="modal_note" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                                <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h5 class="modal-title"><i class="icon-comments position-left"></i>&nbsp;Observações registradas</h5>
+                                </div>
+
+                                <div id="note" class="modal-body">
+                                      
+                                </div>
+
+                                <div class="modal-footer">
+                                        <button type="button" class="btn btn-link" data-dismiss="modal">Fechar</button>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <!-- /Note modal -->
 
         <!-- Footer -->
         <?php echo $this->element('footer'); ?>
@@ -206,4 +238,10 @@
 
 </div>
 <!-- /content area -->
+
+<script>
+        $( document ).ready(function() {
+            initSelects(<?php echo $this->Session->read('enterpriseId'); ?>);
+        });
+</script>
 

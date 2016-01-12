@@ -38,19 +38,7 @@ $(function() {
                 }
             });
         }
-    });
-    
-    $.ajax({
-            type: 'post',
-            url: "searchSelects/1/1",    //trocar esta url pelo id do enterprise na sessão #################################################################################
-            contentType: "json",
-            traditional: true,
-            success: function (result) {                   
-                    //alert(result);                    
-                    var options = JSON.parse(result);
-                    $('#townhouses').multiselect('dataprovider', options);
-            }
-    });
+    });    
     
     $('#towers').multiselect({
         includeSelectAllOption: true,
@@ -131,36 +119,6 @@ $(function() {
             //alert(selected);
             $.ajax({
                 type: 'post',
-                url: "searchSelects/5/" + selected,
-                contentType: "json",
-                traditional: true,
-                success: function (result) {
-                    //alert(result);                    
-                    var options = JSON.parse(result);
-                    $('#loc3').multiselect('dataprovider', options);
-                }
-            });
-        }    
-    });
-    
-    $('#loc3').multiselect({
-        includeSelectAllOption: true,
-        enableFiltering: true,
-        templates: {
-            filter: '<li class="multiselect-item multiselect-filter"><i class="icon-search4"></i> <input class="form-control" type="text"></li>'
-        },
-        onSelectAll: function() {
-            $.uniform.update();
-        },
-        onChange: function(element, checked) {
-            var brands = $('#loc3 option:selected');
-            var selected = [];
-            $(brands).each(function(index, brand){
-                selected.push([$(this).val()]);
-            });
-            //alert(selected);
-            $.ajax({
-                type: 'post',
                 url: "searchSelects/6/" + selected,
                 contentType: "json",
                 traditional: true,
@@ -172,6 +130,36 @@ $(function() {
             });
         }    
     });
+    
+//    $('#loc3').multiselect({
+//        includeSelectAllOption: true,
+//        enableFiltering: true,
+//        templates: {
+//            filter: '<li class="multiselect-item multiselect-filter"><i class="icon-search4"></i> <input class="form-control" type="text"></li>'
+//        },
+//        onSelectAll: function() {
+//            $.uniform.update();
+//        },
+//        onChange: function(element, checked) {
+//            var brands = $('#loc3 option:selected');
+//            var selected = [];
+//            $(brands).each(function(index, brand){
+//                selected.push([$(this).val()]);
+//            });
+//            //alert(selected);
+//            $.ajax({
+//                type: 'post',
+//                url: "searchSelects/6/" + selected,
+//                contentType: "json",
+//                traditional: true,
+//                success: function (result) {
+//                    //alert(result);                    
+//                    var options = JSON.parse(result);
+//                    $('#services').multiselect('dataprovider', options);
+//                }
+//            });
+//        }    
+//    });
     
     $('#services').multiselect({
         includeSelectAllOption: true,
@@ -220,7 +208,7 @@ $(function() {
             $('#tableItems').DataTable().destroy();
             $('#tableItems').DataTable({
                 lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
-                ajax: "/portalqualidade/items/itemsFound/" + $('#townhouses').val() + '/' + $('#towers').val() + '/' + $('#loc1').val() + '/' + $('#loc2').val() + '/' + $('#loc3').val() + '/' + $('#services').val() + '/' + $('#checks').val()+ '/' + ($('#checked1').is(':checked') ? '1' : null) + '/' + ($('#checked2').is(':checked') ? '2' : null)
+                ajax: "/portalqualidade/items/itemsFound/" + $('#townhouses').val() + '/' + $('#towers').val() + '/' + $('#loc1').val() + '/' + $('#loc2').val() + '/' + $('#services').val() + '/' + $('#checks').val()+ '/' + ($('#checked1').is(':checked') ? '1' : null) + '/' + ($('#checked2').is(':checked') ? '2' : null) + '/' + ($('#checked3').is(':checked') ? '0' : null)
             });
     });
     
@@ -236,6 +224,7 @@ $(function() {
         $("#loc3").multiselect("clearSelection");
         $("#services").multiselect("clearSelection");
         $("#checks").multiselect("clearSelection");
+        
         $('#checked1').parents('span').removeClass("checked").end().removeAttr("checked");
         $('#checked2').parents('span').removeClass("checked").end().removeAttr("checked");
         $('#ItemResearchForm').change();
@@ -272,6 +261,44 @@ function getPhoto(itemId){
         });
 }
 
+function getNote(itemId){    
+        //alert(itemId);
+        $.ajax({
+            type: 'post',
+            url: 'noteFound/' + itemId,            
+            contentType: "json",
+            traditional: true,
+            success: function (result) {
+                //alert(result);
+                document.getElementById('note').innerHTML = result;              
+            }
+        });
+}
 
-
-
+function initSelects(itemId){  
+        //alert(itemId);
+        
+        $.ajax({
+                type: 'post',
+                url: "searchSelects/1/" + itemId,
+                contentType: "json",
+                traditional: true,
+                success: function (result) {                   
+                        //alert(result);                    
+                        var options = JSON.parse(result);
+                        $('#townhouses').multiselect('dataprovider', options);
+                }
+        });
+        
+        $.ajax({
+                type: 'post',
+                url: "searchSelects/6/" + itemId,
+                contentType: "json",
+                traditional: true,
+                success: function (result) {                   
+                        //alert(result);                    
+                        var options = JSON.parse(result);
+                        $('#services').multiselect('dataprovider', options);
+                }
+        });
+}

@@ -32,7 +32,7 @@
                     <!-- Task details -->
                     <div class="panel panel-flat">
                             <div class="panel-heading">
-                                    <h6 class="panel-title"><i class="icon-qrcode position-left"></i> Importar verificações</h6>
+                                    <h6 class="panel-title"><i class="icon-qrcode position-left"></i> Importação de FVS para o portal</h6>
                                     <div class="heading-elements">
                                             <ul class="icons-list">
                                                     <li><a data-action="collapse"></a></li>
@@ -40,12 +40,12 @@
                                     </div>
                             </div>
                             <div class="panel-body">  
-                                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                    <p>MUITA ATENÇÃO ao selecionar o bloco que será sincronizado com o Portal QualiTab.</p> 
+                                    <p>A importação de dados do dispositivo para o portal ocorre apenas selecionando um bloco por vez. O Bloco selecionado para ser importado, será transmitido totalmente. Todas as FVS e verificações serão carregadas para o portal conforme estão salvas no seu dispositivo.</p>
                                     <hr>
                                     <img src="/portalqualidade/img/qrcodeexample.jpg" width="300px">
                                     <hr>
-                                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                    <p>Mantenha sempre o portal QualiTab atualizado. E antes de iniciar as suas verificações em campo, certifique-se de que você está com seu dispositivo devidamente atualizado.</p>
                             </div>
                     </div>
                     <!-- /task details -->

@@ -38,8 +38,7 @@ class EnterprisesController extends AppController {
 		if (!$this->Enterprise->exists($id)) {
 			throw new NotFoundException(__('Invalid enterprise'));
 		}
-		$options = array('conditions' => array('Enterprise.' . $this->Enterprise->primaryKey => $id));
-                
+		$options = array('conditions' => array('Enterprise.' . $this->Enterprise->primaryKey => $id ));                
                 $enterprise = $this->Enterprise->find('first', $options);
 		$this->set('enterprise', $enterprise);                
                 //debug($enterprise);
@@ -49,6 +48,128 @@ class EnterprisesController extends AppController {
                 $this->Session->write('enterpriseName', $enterprise['Enterprise']['name']);
                 $this->Session->write('enterpriseLocation', $enterprise['Enterprise']['location']);
                 $this->Session->write('enterpriseImagePath', $enterprise['Enterprise']['image_path']);
+                
+                //Numeros
+                //-------------------------------------------------------
+                $this->loadModel('Item');
+                $total = $this->Item->find('count', array(
+                    'conditions' => array('Item.enterprise_id' => $id)
+                ));
+                //debug($total);
+                
+                $totalC = $this->Item->find('count', array(
+                    'conditions' => array('Item.enterprise_id' => $id, 'Item.lastChecked' => '1')
+                ));
+                //debug($totalC);
+                
+                $totalNC = $this->Item->find('count', array(
+                    'conditions' => array('Item.enterprise_id' => $id, 'Item.lastChecked' => '2')
+                ));
+                //debug($totalNC);
+                $this->set(array('total' => $total, 'totalC' => $totalC, 'totalNC' => $totalNC));    
+                
+                //Distribuição das não conformidades por Serviço
+                //-------------------------------------------------------
+                $services = $this->Enterprise->query("  
+                        SELECT Service.alias, Item.total, ItemC.total
+                        FROM services AS Service
+                        
+                        LEFT JOIN ( 
+                            SELECT Item.service_id, count(Item.id) as total
+                            FROM items AS Item   
+                            WHERE Item.lastChecked = '2'
+                            GROUP BY Item.service_id
+                        ) as Item
+                        ON Item.service_id = Service.id    
+                        
+                        LEFT JOIN ( 
+                            SELECT ItemC.service_id, count(ItemC.id) as total
+                            FROM items AS ItemC  
+                            WHERE ItemC.lastChecked = '1' OR ItemC.lastChecked = '2'
+                            GROUP BY ItemC.service_id
+                        ) as ItemC
+                        ON ItemC.service_id = Service.id   
+                        
+                        WHERE Service.enterprise_id = " . $id . 
+                        " ORDER BY Item.total DESC                        
+                ");
+                //debug($services);
+                
+                $legends = array();
+                $series = array();
+                $cont = 1;
+                $sumOthers = 0;
+                foreach ($services as $service): 
+                    if($cont <= 5){
+                        $legends[] = $service['Service']['alias'];
+                        $series[] = array(
+                            'value' => $service['Item']['total'],
+                            'name' => $service['Service']['alias']
+                        );
+                        $qtdeTotal[] = $service['ItemC']['total'];
+                    }else{
+                        $sumOthers = $sumOthers + $service['Item']['total'];
+                    }
+                    $cont++;
+                endforeach;
+                
+                //Outros
+                $legends[] = 'Outros';
+                $series[] = array(
+                    'value' => $sumOthers,
+                    'name' => 'Outros'
+                );
+                
+                $dataServices = array( 
+                    'legends' => $legends,
+                    'series' => $series,
+                    'qtdeTotal' => $qtdeTotal 
+                );
+                $this->set('dataServices', $dataServices);     
+                //debug($dataServices);
+                
+                
+                
+                //Distribuição das não conformidades por Condomínio
+                //-------------------------------------------------------
+                $townhouses = $this->Enterprise->query(" 
+                    SELECT Townhouse.name, Tower.total
+                    FROM townhouses AS Townhouse
+                    LEFT JOIN ( 
+                            SELECT Tower.townhouse_id, SUM(Item.total) as total
+                            FROM towers AS Tower
+                            LEFT JOIN ( 
+                                SELECT Item.tower_id, count(Item.id) as total
+                                FROM items AS Item    
+                                WHERE Item.lastChecked = '2'
+                                GROUP BY Item.tower_id                                
+                            ) as Item
+                            ON Item.tower_id = Tower.id  
+                            GROUP BY Tower.townhouse_id
+                            
+                    ) as Tower
+                    ON Tower.townhouse_id = Townhouse.id  
+                    GROUP BY Townhouse.id
+                ");
+                //debug($townhouses);
+                
+                $legends = array();
+                $series = array();
+                foreach ($townhouses as $townhouse):                 
+                    $legends[] = $townhouse['Townhouse']['name'];
+                    $series[] = array(
+                        'value' => $townhouse['Tower']['total'],
+                        'name' => $townhouse['Townhouse']['name']
+                    );
+                endforeach;  
+                $dataTownhouses = array( 
+                    'legends' => $legends,
+                    'series' => $series 
+                );
+                $this->set('dataTownhouses', $dataTownhouses);     
+                //debug($dataServices);
+                
+                
 	}
 
 /**
@@ -162,45 +283,5 @@ class EnterprisesController extends AppController {
                     }
                 }
         }
-
-/*
- *
- * grafDataSource method
- *
- */
-        public function grafDataSource() {
-            $this->autoRender = false;
-            
-            $services = $this->Enterprise->query("  
-                SELECT Service.name, Item.total
-                FROM services AS Service
-                LEFT JOIN ( 
-                    SELECT Item.service_id, count(Item.id) as total
-                    FROM items AS Item     
-                    GROUP BY Item.service_id
-                ) as Item
-                ON Item.service_id = Service.id                                                  
-                WHERE Service.enterprise_id = " . $this->Session->read('enterpriseId') . "
-            ");
-            //debug($services);
-            
-            $legends = array();
-            $series = array();
-            foreach ($services as $service):                 
-                $legends[] = $service['Service']['name'];
-                $series[] = array(
-                    'value' => $service['Item']['total'],
-                    'name' => $service['Service']['name']
-                );
-            endforeach;  
-            $data = array( 
-                'legends' => $legends,
-                'series' => $series 
-            );
-            //debug($data);
-            
-            echo json_encode($data);             
-        } 
-
         
 }

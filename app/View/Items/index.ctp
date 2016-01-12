@@ -79,10 +79,9 @@
                                     <th>Cond./Bloco</th>
                                     <th>Pavimento</th>
                                     <th>Apto/Hall</th>
-                                    <th>Outros</th>
                                     <th>Serviço - FVS</th>
                                     <th>Verificação</th>
-                                    <th>Verif.</th>
+                                    <th>Status</th>
                                     <th>Foto</th>
                                 </tr>
                         </thead>
@@ -103,17 +102,17 @@
                 <div class="modal-content">
                         <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h5 class="modal-title"><i class="icon-menu7"></i> &nbsp;Modal with icons</h5>
+                                <h5 class="modal-title"><i class=" icon-download"></i> &nbsp;Exportação de FVS para dispositivo</h5>
                         </div>
 
                         <div class="modal-body">
                                 <div class="alert alert-info alert-styled-left text-blue-800 content-group">
-                                    <span class="text-semibold">Here we go!</span> Example of an alert inside modal.
+                                    <span class="text-semibold">ATENÇÃO!</span> Esta operação causa sobreposição de arquivos
                                     <button type="button" class="close" data-dismiss="alert">×</button>
                                 </div>
 
-                                <h6 class="text-semibold"><i class="icon-law position-left"></i> Sample heading with icon</h6>
-                                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                <h6 class="text-semibold"><i class="icon-bubbles10 position-left"></i> Instruções de exportação</h6>
+                                <p>A exportação para o dispositivo só ocorre um bloco por vez. O bloco selecionado para a exportação será transmitido totalmente. Todas as FVS serão recarregadas em seu dispositivo conforme estão na última versão sincronizada no portal QualiTab.</p>
 
                                 <hr>
 
@@ -136,7 +135,7 @@
                         <div class="modal-content">
                                 <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h5 class="modal-title">Fotos registradas</h5>
+                                        <h5 class="modal-title"><i class="icon-camera position-left"></i>&nbsp;Fotos registradas</h5>
                                 </div>
 
                                 <div class="modal-body">
@@ -166,3 +165,24 @@
                 </div>
         </div>
         <!-- /Photo modal -->
+        
+        <!-- Note modal -->
+        <div id="modal_note" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                                <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h5 class="modal-title"><i class="icon-comments position-left"></i>&nbsp;Observações registradas</h5>
+                                </div>
+
+                                <div id="note" class="modal-body">
+                                      
+                                </div>
+
+                                <div class="modal-footer">
+                                        <button type="button" class="btn btn-link" data-dismiss="modal">Fechar</button>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <!-- /Note modal -->

@@ -112,11 +112,6 @@
                         </div>
 
                         <div class="modal-body">
-                                <div class="alert alert-info alert-styled-left text-blue-800 content-group">
-                                    <span class="text-semibold">Here we go!</span> Example of an alert inside modal.
-                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                </div>
-
                                 <h6 class="text-semibold"><i class="icon-law position-left"></i> Habilitar novo dispositivo</h6>
                                 <p>Para habilitar utilize o leitor de Qr-code do aplicativo instalado no dispositivo.</p>
 

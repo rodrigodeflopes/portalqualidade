@@ -156,6 +156,20 @@ function getPhoto(itemId){
         });
 }
 
+function getNote(itemId){    
+        //alert(itemId);
+        $.ajax({
+            type: 'post',
+            url: 'items/noteFound/' + itemId,            
+            contentType: "json",
+            traditional: true,
+            success: function (result) {
+                //alert(result);
+                document.getElementById('note').innerHTML = result;              
+            }
+        });
+}
+
 
 
 

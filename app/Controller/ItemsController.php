@@ -127,7 +127,7 @@ class ItemsController extends AppController {
  * itemsFound method
  *
  */
-        public function itemsFound($townhouses = null, $towers = null, $loc1 = null, $loc2 = null, $loc3 = null, $services = null, $checks = null, $checked1 = null, $checked2 = null) {
+        public function itemsFound($townhouses = null, $towers = null, $loc1 = null, $loc2 = null, $services = null, $checks = null, $checked1 = null, $checked2 = null, $checked3 = null) {
             
             $this->autoRender = false;
             
@@ -136,7 +136,7 @@ class ItemsController extends AppController {
             if($townhouses !== 'null'  && $townhouses !== null){
                 $townhouses = split(',', $townhouses);
                 $conditions[] = array('Tower.townhouse_id' => $townhouses);
-            } 
+            }
             if($towers !== 'null'  && $towers !== null){
                 $towers = split(',', $towers);
                 $conditions[] = array('Item.tower_id' => $towers);
@@ -149,10 +149,10 @@ class ItemsController extends AppController {
                 $loc2 = split(',', $loc2);
                 $conditions[] = array('Item.Location2_id' => $loc2);
             } 
-            if($loc3 !== 'null' && $loc3 !== null){
-                $loc3 = split(',', $loc3);
-                $conditions[] = array('Item.Location3_id' => $loc3);
-            } 
+//            if($loc3 !== 'null' && $loc3 !== null){
+//                $loc3 = split(',', $loc3);
+//                $conditions[] = array('Item.Location3_id' => $loc3);
+//            } 
             if($services !== 'null' && $services !== null){
                 $services = split(',', $services);
                 $conditions[] = array('Item.Service_id' => $services);
@@ -162,13 +162,19 @@ class ItemsController extends AppController {
                 $conditions[] = array('Item.Check_id' => $checks);
             } 
             
-            if($checked1 !== 'null' && $checked1 !== null && $checked2 !== 'null' && $checked2 !== null){
-                $conditions[] = array('Item.lastChecked' => array($checked1, $checked2));
-            }else if($checked1 !== 'null' && $checked1 !== null){
-                $conditions[] = array('Item.lastChecked' => $checked1);
-            }else if($checked2 !== 'null' && $checked2 !== null){
-                $conditions[] = array('Item.lastChecked' => $checked2);
-            } 
+            $conditionsChecks = array();
+            if(($checked1 !== 'null' && $checked1 !== null) || ($checked2 !== 'null' && $checked2 !== null) || ($checked3 !== 'null' && $checked3 !== null)){
+                if($checked1 !== 'null' && $checked1 !== null){
+                    $conditionsChecks[] = $checked1;
+                }
+                if($checked2 !== 'null' && $checked2 !== null){
+                    $conditionsChecks[] = $checked2;
+                }
+                if($checked3 !== 'null' && $checked3 !== null){
+                    $conditionsChecks[] = $checked3;
+                }
+                $conditions[] = array('Item.lastChecked' => $conditionsChecks);
+            }
             //debug($conditions);
             //debug($this->request); 
             
@@ -206,18 +212,20 @@ class ItemsController extends AppController {
                 }else{
                     $checked = '';
                 }               
-                //Verificar se tem foto.
-                $photo = (Set::check($item, 'Photo.0') ? "<a data-toggle='modal' data-target='#modal_photo' onclick='getPhoto(" . $item['Item']['id'] . ")'><i class='icon-camera'></i></a>" : "");
-                         
+                
+                $actions = "<ul class='icons-list'>";                
+                $actions = $actions . (Set::check($item, 'Photo.0') ? "<li><a data-toggle='modal' data-target='#modal_photo' onclick='getPhoto(" . $item['Item']['id'] . ")'><i class='icon-camera'></i></a><li>" : "");                
+                $actions = $actions . ($item['Item']['lastNote'] ? "<li><a data-toggle='modal' data-target='#modal_note' onclick='getNote(" . $item['Item']['id'] . ")'><i class='icon-comments'></i></a><li>" : "");                
+                $actions = $actions . "</ul>";
+                
                 $result[] = array(
                     $EnterpriseTownhouse, 
                     $item['Location1']['name'], 
                     $item['Location2']['name'], 
-                    $item['Location3']['name'], 
                     $item['Service']['name'], 
-                    $item['Check']['name'], 
+                    $item['Item']['id'], 
                     $checked,
-                    $photo
+                    $actions
                 ); 
             }        
             $result = array('draw' => 10, 'recordsTotal' => count($result), 'recordsFiltered' => count($result), 'data' => $result);   
@@ -245,6 +253,24 @@ class ItemsController extends AppController {
             
             echo json_encode($photos);            
             
+        }    
+        
+/*
+ *
+ * noteFound method
+ *
+ */
+        public function noteFound($itemId = null) {
+            $this->autoRender = false;
+                         
+            $note = $this->Item->find('first', array(
+                'conditions' => array(
+                    'Item.id' => $itemId
+                )
+            ));            
+            //debug($photos);
+            
+            echo $note['Item']['lastNote']; 
         }    
         
 /**
@@ -372,12 +398,12 @@ class ItemsController extends AppController {
                         $dataSearch = split(',', $dataSearch);  
                         $items = $this->Item->find('all', array(
                             'contain' => array(
-                                'Location3',
+                                'Location2',
                                 'Service'
                             ),
-                            'conditions' => array(
-                                'Location3.id' => $dataSearch,
-                            ),
+//                            'conditions' => array(
+//                                'Location2.id' => $dataSearch,
+//                            ),
                             'group' => array(
                                 'Service.id'
                             ),

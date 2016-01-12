@@ -17,7 +17,7 @@
 <div class="page-header page-header-xs">
         <div class="page-header-content">
                 <div class="page-title">
-                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Transferências</span></h4>
+                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Histórico de Transferências</span></h4>
                 </div>
 
                 <div class="heading-elements">
@@ -30,7 +30,7 @@
 
         <div class="breadcrumb-line">
                 <ul class="breadcrumb">
-                        <li><?php echo $this->Html->link('<i class="icon-transmission position-left"></i> Transferências', array('action' => 'index'), array('escape' => false)); ?></li>
+                        <li><?php echo $this->Html->link('<i class="icon-transmission position-left"></i> Histórico de Transferências', array('action' => 'index'), array('escape' => false)); ?></li>
                 </ul>
         </div>
 </div>
@@ -78,7 +78,6 @@
                                     <th>Dispositivo</th>
                                     <th>Bloco</th>
                                     <th>data</th>
-                                    <th>Ações</th>
                                 </tr>
                         </thead>
                 </table>

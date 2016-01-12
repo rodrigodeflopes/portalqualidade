@@ -175,18 +175,17 @@ class TransfersController extends AppController {
                                 $this->loadModel('Item');
                                 $this->Item->save($newLastMeasurements);
                                 
-                            endforeach;                                
+                            endforeach;   
                             $this->set('message', true);  
-        				
+                            
                         } else {
                                 $this->set('message', 'Erro ao gravar Transfer!');
-                        }
-                            
+                        }                            
                 }else{                
                     $this->set('message', 'Dispositivo não habilitado!');
                 }
             }else{                
-                $this->set('message', 'Arquivo não carregado');              
+                $this->set('message', 'Arquivo não carregado');     
             }       
             
             
@@ -217,7 +216,8 @@ class TransfersController extends AppController {
  */        
         public function download($tower_id, $uuid) { 
                 $this->layout = 'ajax';
-                                
+                $this->autoRender = false;
+                
                 //Verificar se o Dispositivo tem permissão para acesso, se já é cadastrado.
                 //$this->loadModel('Device');
                 $this->Transfer->Device->recursive = 0;
@@ -232,17 +232,13 @@ class TransfersController extends AppController {
                             'Location2',
                             'Location3',
                             'Service',
-                            'Check',
-                            'Measurement' => array(
-                                'order' => 'transfer_id DESC',
-                                'limit' => 1
-                            ),
+                            'Check'
                         ),
                         'conditions' => array(  
                             'Item.Tower_id' => $tower_id
                         ),
                         'fields' => array(
-                            'Item.id', 'Tower.name', 'Location1.name', 'Location2.name', 'Location3.name', 'Service.name', 'Check.name', 'Check.method'
+                            'Item.id', 'Tower.name', 'Location1.name', 'Location2.name', 'Location3.name', 'Service.name', 'Check.name', 'Check.method', 'Item.lastChecked', 'Item.lastNote'
                         )
                     ));
                     //debug($items);
@@ -256,13 +252,7 @@ class TransfersController extends AppController {
                     ));
                     //debug($tower);
                                    
-                    foreach ($items as $item):
-                        
-                        if(Set::check($item, 'Measurement.0')){       
-                            $checked = $item['Measurement'][0]['checked'];
-                            $note = $item['Measurement'][0]['note'];
-                        }
-                        
+                    foreach ($items as $item):                                                
                         $newItems[] = array( 
                             'id' => $item['Item']['id'],
                             'loc1' => $item['Location1']['name'],
@@ -271,8 +261,8 @@ class TransfersController extends AppController {
                             'loc4' => $item['Service']['name'],
                             'name' => $item['Check']['name'],
                             'method' => $item['Check']['method'],
-                            'checked' => $checked,
-                            'note' => $note,
+                            'checked' => +$item['Item']['lastChecked'],
+                            'note' => $item['Item']['lastNote'],
                             'image' => '',
                         );
                     endforeach; 
@@ -305,8 +295,7 @@ class TransfersController extends AppController {
                     //debug($jsonString);            
                     //debug(json_decode($jsonString, TRUE));
                     
-                    $this->autoRender = false;
-
+                    
                     $this->response->file(
                         "files/downloads/test.json",
                         array(
@@ -317,7 +306,7 @@ class TransfersController extends AppController {
                     return $this->response;
                 }else{
                     
-                    $this->set('message', false);
+                    return false;
                 }
                 
                 //apagar arquivo após download.
@@ -329,6 +318,8 @@ class TransfersController extends AppController {
  * app update
  */        
         public function appUpdate($uuid, $appVersion) { 
+            $this->layout = 'ajax';
+            $this->autoRender = false;
             
             //Verificar se o Dispositivo tem permissão para acesso, se já é cadastrado.
             $this->loadModel('Device');
@@ -338,7 +329,7 @@ class TransfersController extends AppController {
                 $this->response->file(
                     "files/downloads/app_updates/current_update/android-debug.apk",
                     array(
-                            'download' => true
+                        'download' => true
                     )
                 );            
                 return $this->response;  
@@ -367,8 +358,8 @@ class TransfersController extends AppController {
                 $result[] = array(
                     $transfer['Device']['name'], 
                     $transfer['Tower']['name'], 
-                    $transfer['Transfer']['created'], 
-                    '<i class="icon-camera"></i>');                        
+                    $transfer['Transfer']['created']
+                );                        
             }        
             $result = array('draw' => 10, 'recordsTotal' => count($transfers), 'recordsFiltered' => count($transfers), 'data' => $result);     
             

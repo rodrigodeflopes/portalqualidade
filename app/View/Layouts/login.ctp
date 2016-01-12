@@ -7,7 +7,8 @@
                 <?php echo $this->Html->meta(array('content' => 'IE=edge,chrome=1', 'http-equiv' => 'X-UA-Compatible')); ?>
                 <!-- <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"> -->
 
-                <title>Limitless - Responsive Web Application Kit by Eugene Kopyov</title>
+                <title>QualiTab</title>
+                <link rel="shortcut icon" href="<?php echo Router::url('/', true); ?>/img/favicon.gif" />
 
                 <?php echo $this->Html->meta(array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1')); ?>
                 <?php echo $this->Html->meta(array('name' => 'description', 'content' => '')); ?>
