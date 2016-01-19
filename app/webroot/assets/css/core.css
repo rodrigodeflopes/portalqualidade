@@ -4922,6 +4922,14 @@ a.thumbnail.active {
 .thumb-rounded img {
   border-radius: 50%;
 }
+.thumb-user {
+  width: 190px;
+  margin: 20px auto 0 auto;
+}
+.thumb-user,
+.thumb-user img {
+  border-radius: 50%;
+}
 .caption-overflow {
   position: absolute;
   top: 0;

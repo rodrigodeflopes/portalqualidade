@@ -65,7 +65,7 @@
                         <tbody>
                                 <?php foreach ($devices as $device): ?>
                                         <tr>
-                                                <td><?php echo $this->Html->image($device['Device']['image_path'], array('class' => 'img-circle img-sm')); ?></td>
+                                                <td><i class="icon-tablet"></i></td>
                                                 <td><?php echo $this->Html->link(h($device['Device']['name']), array('action'=>'view', $device['Device']['id']), array('escape' => false)); ?>&nbsp;</td>
                                                 <td><?php echo h($device['Device']['model']); ?>&nbsp;</td>
                                                 <td><?php echo h($device['Device']['uuid']); ?>&nbsp;</td>

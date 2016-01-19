@@ -223,7 +223,7 @@ class ItemsController extends AppController {
                     $item['Location1']['name'], 
                     $item['Location2']['name'], 
                     $item['Service']['name'], 
-                    $item['Item']['id'], 
+                    $item['Check']['name'], 
                     $checked,
                     $actions
                 ); 

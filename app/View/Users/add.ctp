@@ -1,43 +1,86 @@
-<ul class="breadcrumb">
-    <li><?php echo $this->Html->link(__('Usuários'), array('action' => 'index')); ?> <span class="divider">/</span></li>
-    <li class="active">Novo usuário</li>
-</ul>
+<!-- Theme JS files -->
+<?php echo $this->Html->script(array(
+    '/assets/js/plugins/forms/styling/uniform.min',
+    '/assets/js/plugins/forms/selects/bootstrap_select.min',
+    '/assets/js/pages/usersAdd'
+)); ?>
+<!-- /Theme JS files -->
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <?php echo $this->Session->flash(); ?>
-
-        <div class="btn-toolbar">        
-            <?php echo $this->Html->link($this->Html->tag('i', ' Salvar', array('class'=>'icon-save')), '#myModal', array('escape' => false, 'data-toggle'=>'modal', 'class'=>' btn btn-primary')); ?>
-        </div>    
-
-        <div class="well">
-            <?php echo $this->Form->create('User'); ?>
-                
-                <div class="toc">
-                    <?php echo $this->Html->image('/images/user.jpg', array('class' => 'img-UserGroup')); ?>
+<!-- Page header -->
+<div class="page-header page-header-xs">
+        <div class="page-header-content">
+                <div class="page-title">
+                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Novo usuário</span></h4>
                 </div>
-                <?php 
-                    echo $this->Form->input('name', array('label' => 'Nome', 'class' => 'span3'));
-                    echo $this->Form->input('email', array('label' => 'E-mail de acesso', 'class' => 'span3')); 
-                    echo $this->Form->input('status', array('label' => 'Status', 'class' => 'span3')); 
-                    echo $this->Form->input('password', array('type' => 'text', 'value' => $this->Password->generatePassword(),'label' => 'Senha provisória', 'class' => 'span3'));
-                ?>   
-
-                <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel">Confirmação</h3>
-                        </div>
-                        <div class="modal-body">
-                            <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Deseja salvar as alterações?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                            <button class="btn btn-primary"><i class="icon-save"></i> Salvar</button>
-                        </div>
-                </div>     
-            <?php echo $this->Form->end(); ?>  
         </div>
-    </div>
-</div>    
+
+        <div class="breadcrumb-line">
+                <ul class="breadcrumb">
+                        <li><?php echo $this->Html->link('<i class="icon-users position-left"></i> Usuários', array('action' => 'index'), array('escape' => false)); ?></li>
+                        <li class="active">Novo usuário</li>
+                </ul>
+        </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+        <!-- Profile info -->
+        <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title"><i class="icon-user"></i> &nbsp;Informações de Perfil</h6>
+                        <div class="heading-elements">
+                                <ul class="icons-list">
+                                        <li><a data-action="collapse"></a></li>
+                                        <li><a data-action="reload"></a></li>
+                                </ul>
+                        </div>
+                </div>
+
+                <div class="panel-body">
+                        <?php echo $this->Form->create('User'); ?>
+                                <?php echo $this->Form->input('id'); ?>
+                                <div class="form-group">
+                                        <div class="row">
+                                                <div class="col-md-5">
+                                                        <?php echo $this->Form->input('name', array('label' => 'Nome', 'class' => 'form-control')); ?>
+                                                </div>
+                                                <div class="col-md-4">
+                                                        <?php echo $this->Form->input('sector', array('label' => 'Setor', 'class' => 'form-control')); ?>
+                                                </div>
+                                                <div class="col-md-3">
+                                                        <?php echo $this->Form->input('phone', array('label' => 'Telefone', 'class' => 'form-control')); ?>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="form-group">
+                                        <div class="row">
+                                                <div class="col-md-6">
+                                                        <?php echo $this->Form->input('email', array('label' => 'Login / E-mail', 'class' => 'form-control')); ?>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                        <?php echo $this->Form->input('password', array('type' => 'text', 'value' => $this->Password->generatePassword(),'label' => 'Senha provisória', 'class' => 'form-control')); ?>
+                                                </div>
+                                                <div class="col-md-2">  
+                                                        <?php echo $this->Form->input('user_status_id', array('label' => 'Status', 'class' => 'bootstrap-select form-control')); ?> 
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="text-right">
+                                        <button type="submit" class="btn btn-primary">Salvar <i class="icon-arrow-right14 position-right"></i></button>
+                                </div>
+                        <?php echo $this->Form->end(); ?>      
+                </div>
+        </div>
+        <!-- /profile info -->
+                        
+        <!-- Footer -->
+        <?php echo $this->element('footer'); ?>
+        <!-- /footer -->
+
+</div>
+<!-- /content area -->

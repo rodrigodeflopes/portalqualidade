@@ -19,13 +19,6 @@
                 <div class="page-title">
                         <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Histórico de Transferências</span></h4>
                 </div>
-
-                <div class="heading-elements">
-                        <div class="heading-btn-group">
-                                <a class="btn btn-link btn-float has-text" id="excelLink"><i class="icon-file-excel text-primary"></i> <span>Excel</span></a>
-                                <a class="btn btn-link btn-float has-text"><i class="icon-printer2 text-primary"></i> <span>Imprimir</span></a>
-                        </div>
-                </div>
         </div>
 
         <div class="breadcrumb-line">

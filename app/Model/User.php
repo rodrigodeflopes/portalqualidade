@@ -46,4 +46,20 @@ class User extends AppModel {
 		)
 	);
         
+//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'UserStatus' => array(
+			'className' => 'UserStatus',
+			'foreignKey' => 'user_status_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 }

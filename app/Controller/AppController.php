@@ -44,7 +44,7 @@ class AppController extends Controller {
             'authenticate' => array(
                 'Form' => array(
                     'fields' => array('username' => 'email'),
-                    'scope' => array('User.status' => 1)
+                    'scope' => array('User.user_status_id' => 1)
                 )
             )
         ), 

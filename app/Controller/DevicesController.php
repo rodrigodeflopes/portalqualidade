@@ -133,6 +133,7 @@ class DevicesController extends AppController {
                         if(!$this->Device->findByUuid($arrayData['Device']['uuid'])){
                                 $arrayData['Device']['name'] = 'Não informado';
                                 $arrayData['Device']['image_path'] = 'devices.png';
+                                //$message = print_r($arrayData);
                                 if ($this->Device->save($arrayData)) {
                                         $message = 'Dispositivo habilitado com sucesso!';
                                 } else {

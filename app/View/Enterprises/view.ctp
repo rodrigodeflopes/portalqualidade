@@ -176,7 +176,7 @@ $(function () {
 
     require.config({
         paths: {
-            echarts: '/portalqualidade/assets/js/plugins/visualization/echarts'
+            echarts: '<?php echo Router::url('/', true); ?>/assets/js/plugins/visualization/echarts'
         }
     });
 

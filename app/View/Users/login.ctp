@@ -13,8 +13,8 @@
                                 <!-- Advanced login -->
                                 <?php echo $this->Form->create('User', array('action' => 'login')); ?>
                                         <div class="panel panel-body login-form">
-                                                <div class="text-center">                                                        
-                                                        <img src="/portalqualidade/app/webroot/img/qualitab.png" width="80%">
+                                                <div class="text-center"> 
+                                                        <?php echo $this->Html->image('qualitab.png', array('width' => '80%')); ?>
                                                         <h5 class="content-group-lg">Login <small class="display-block">Entre com suas credenciais</small></h5>
                                                 </div>
                                                 
@@ -34,9 +34,9 @@
 
                                                 <div class="form-group">
                                                         <button type="submit" class="btn bg-blue btn-block">Login <i class="icon-circle-right2 position-right"></i></button>
-                                                </div>                                                
-                                                <img src="/portalqualidade/app/webroot/img/apis.jpg" width="40%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <img src="/portalqualidade/app/webroot/img/tecplaner.png" width="50%">
+                                                </div>  
+                                                <?php echo $this->Html->image('apis.jpg', array('width' => '40%')); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <?php echo $this->Html->image('tecplaner.png', array('width' => '50%')); ?>
                                         </div>
                                 <?php echo $this->Form->end(); ?>
                                 <!-- /advanced login -->

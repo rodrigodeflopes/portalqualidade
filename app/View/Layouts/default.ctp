@@ -43,8 +43,8 @@
                 <!-- Main navbar -->
                 <div class="navbar navbar-inverse">
                         <div class="navbar-header">
-                                <a class="nav-brand" href="/portalqualidade/enterprises/index"><img src="/portalqualidade/img/qualitab-nav.png" alt="" width="130px" style="margin-top: 10px; margin-left: 14px"></a>
-                                <a class="nav-brand" href="http://www.apisengenharia.com/" target="_blank"><img src="/portalqualidade/img/apis-nav.png" alt="" width="80px" style="margin-top: 10px; margin-left: 14px"></a>
+                                <?php echo $this->Html->link($this->Html->image('qualitab-nav.png', array('width' => '130px', 'style' => 'margin-top: 10px; margin-left: 14px')), array('controller' => 'enterprises', 'action' => 'index'), array('escape' => false, 'class' => 'nav-brand')); ?>
+                                <?php echo $this->Html->link($this->Html->image('apis-nav.png', array('width' => '80px', 'style' => 'margin-top: 10px; margin-left: 14px')), 'http://www.apisengenharia.com', array('escape' => false, 'class' => 'nav-brand', 'target' => '_blank')); ?>
 
                                 <ul class="nav navbar-nav pull-right visible-xs-block">
                                         <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -142,8 +142,9 @@
                                                                         
                                                                         <!-- Sistema -->
                                                                         <li class="navigation-header"><span>Sistema</span> <i class="icon-menu" title="Forms"></i></li>   
-                                                                            <li><?php echo $this->Html->link('<i class="icon-people"></i> <span>Usuários</span>', array('controller' => 'users', 'action' => 'index'), array('escape' => false)); ?></li>
+                                                                            <li><?php echo $this->Html->link('<i class="icon-users"></i> <span>Usuários</span>', array('controller' => 'users', 'action' => 'index'), array('escape' => false)); ?></li>
                                                                             <li><?php echo $this->Html->link('<i class="icon-tablet"></i> <span>Dispositivos</span>', array('controller' => 'devices', 'action' => 'index'), array('escape' => false)); ?></li>
+                                                                            <li><?php echo $this->Html->link('<i class="icon-width"></i> <span>Updates</span>', array('controller' => 'appUpdates', 'action' => 'index'), array('escape' => false)); ?></li>
                                                                         <!-- /Sistema -->
                                                                         
                                                                         

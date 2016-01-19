@@ -24,7 +24,6 @@
                         <div class="heading-btn-group">
                                 <a class="btn btn-link btn-float has-text" data-toggle="modal" data-target="#modal_sync" onclick="qrcodeCreate('<?php echo Router::url('/',true); ?>')"><i class="icon-qrcode text-primary"></i><span>Sincronizar</span></a>
                                 <a class="btn btn-link btn-float has-text" id="excelLink"><i class="icon-file-excel text-primary"></i> <span>Excel</span></a>
-                                <a class="btn btn-link btn-float has-text"><i class="icon-printer2 text-primary"></i> <span>Imprimir</span></a>
                         </div>
                 </div>
         </div>

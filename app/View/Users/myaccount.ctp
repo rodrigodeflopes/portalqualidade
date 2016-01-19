@@ -1,88 +1,244 @@
-<ul class="breadcrumb">
-    <li><?php echo $this->Html->link(__('Principal'), array('controller' => 'main','action' => 'index')); ?> <span class="divider">/</span></li>
-    <li class="active">Minha conta</li>
-</ul>
+<!-- Theme JS files -->
+<?php echo $this->Html->script(array(
+    '/assets/js/plugins/forms/styling/uniform.min',
+    '/assets/js/plugins/forms/selects/select2.min',
+    '/assets/js/pages/usersMyAccount'
+)); ?>
+<!-- /Theme JS files -->
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <?php echo $this->Session->flash(); ?>
-
-        <div class="btn-toolbar">        
-          <a href="#SaveModal" data-toggle="modal" class="btn btn-primary"><i class="icon-save"></i> Salvar</a>  
-          <div class="btn-group">
-          </div>
-        </div>      
-
-        <div class="well">
-            <?php echo $this->Form->create('User', array('type' => 'file')); ?>
-                <?php echo $this->Form->input('id'); ?>
-
-                <ul class="nav nav-tabs">
-                  <li class="active"><a href="#home" data-toggle="tab">Perfil</a></li>
-                  <li><a href="#redefine" data-toggle="tab">Redefinir Senha</a></li>
-                </ul>  
-
-                <div id="myTabContent" class="tab-content">  
-                    <div class="tab-pane active in" id="home">
-                        <div class="pull-left" style="position:relative;">
-                            <?php echo $this->Html->image($this->request->data['User']['image_path'], array('class' => 'img-UserGroup')); ?>
-                            <div style='position:absolute; bottom:10px; right:10px; color:red;'>
-                                <a href="#FotoModal" data-toggle="modal"><span class='label label-info'><i class="icon-camera"></i> Foto</span></a>
-                            </div>    
-                        </div>
-                        <div class="pull-left" style="margin-left: 40px;">
-                            <?php 
-                                echo $this->Form->input('name', array('label' => 'Nome'));
-                                echo $this->Form->input('email', array('label' => 'E-mail de acesso')); 
-                            ?>
-                            <p><strong>Último acesso: </strong><?php echo h($this->Time->format('d/m/Y H:i:s', $this->request->data['User']['modified'])); ?></p>
-                        </div>                           
-                    </div>
-
-                    <div class="tab-pane fade" id="redefine">
-                        <?php 
-                            echo $this->Form->input('password', array('type' => 'hidden', 'label' => 'Redefinir Senha'));
-                            echo $this->Form->input('new_password', array('type' => 'password', 'value' => $this->data['User']['password'], 'label' => 'Nova senha', 'class' => 'span3'));
-                        ?>
-                    </div>
-
+<!-- Page header -->
+<div class="page-header page-header-xs">
+        <div class="page-header-content">
+                <div class="page-title">
+                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Minha conta</span></h4>
                 </div>
-
-                <div class="modal small hide fade" id="SaveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel">Confirmação</h3>
-                        </div>
-                        <div class="modal-body">
-                            <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Deseja salvar as alterações?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                            <button class="btn btn-primary"><i class="icon-save"></i> Salvar</button>
-                        </div>
-                </div>    
-                <div class="modal small hide fade" id="FotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel">Alterar imagem de perfil</h3>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row-fluid">
-                                <div class="span2"><i class="icon-user modal-icon"></i></div> Selecione um arquivo de imagem:
-                                <?php echo $this->Form->file('uploadfile', array('label' => 'Arquivo de imagem', 'class' => 'span12')); ?> 
-                                <?php echo $this->Form->input('image_path', array('type' => 'hidden', 'value' => $this->request->data['User']['image_path']));  ?>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                            <button class="btn btn-primary"><i class="icon-save"></i> Alterar</button>
-                        </div>
-                </div>
-
-            <?php echo $this->Form->end(); ?>          
         </div>
-    </div>
+
+        <!-- Toolbar -->
+        <div class="navbar navbar-default navbar-xs">
+                <ul class="nav navbar-nav visible-xs-block">
+                        <li class="full-width text-center"><a data-toggle="collapse" data-target="#navbar-filter"><i class="icon-menu7"></i></a></li>
+                </ul>
+
+                <div class="navbar-collapse collapse" id="navbar-filter">
+                        <ul class="nav navbar-nav element-active-slate-400">
+                                <li class="active"><a href="#profile" data-toggle="tab"><i class="icon-user position-left"></i> Perfil</a></li>
+                                <!--<li><a href="#settings" data-toggle="tab"><i class="icon-cog3 position-left"></i> Config.</a></li>-->
+                        </ul>
+                </div>
+        </div>
+        <!-- /toolbar -->
 </div>
+<!-- /page header -->
 
 
+<!-- Content area -->
+<div class="content">
+        <?php echo $this->Session->flash(); ?> 
+        <!-- User profile -->
+        <div class="row">
+                <div class="col-lg-3">
+                        <!-- User thumbnail -->
+                        <div class="thumbnail" style="height: 322px;">
+                                <div class="thumb thumb-user thumb-slide">
+                                        <?php echo $this->Html->image($this->request->data['User']['image_path'], array('id' => 'imageProfile',)); ?>
+                                </div>
 
+                                <div class="caption text-center">
+                                        <h6 class="text-semibold no-margin"><?php echo $this->request->data['User']['name']; ?> 
+                                            <small class="display-block"><?php echo $this->request->data['User']['sector']; ?></small>
+                                            <small class="display-block" style="margin-top: 10px;"><i class="icon-phone2"></i> <?php echo $this->request->data['User']['phone']; ?></small>
+                                        </h6>
+                                </div>
+                        </div>
+                        <!-- /user thumbnail -->
+
+
+                        <!-- Navigation -->
+                        <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                        <h6 class="panel-title">Dados</h6>
+                                </div>
+
+                                <div class="list-group list-group-borderless no-padding-top">
+                                        <a href="#" class="list-group-item"><i class=" icon-price-tag3"></i> Status <span class="<?php echo $this->request->data['UserStatus']['cssClass']; ?> pull-right"><?php echo $this->request->data['UserStatus']['name']; ?></span></a>
+                                        <a href="#" class="list-group-item"><i class="icon-laptop"></i> Último acesso <span class="pull-right"><?php echo h($this->Time->format('d/m/Y H:i', $this->request->data['User']['modified'])); ?></span></a>
+                                </div>
+                        </div>
+                        <!-- /navigation -->
+                </div>
+                <div class="col-lg-9">
+                        <div class="tabbable">
+                                <div class="tab-content">                                        
+                                        <div class="tab-pane fade in active" id="profile">
+                                                <!-- Profile info -->
+                                                <div class="panel panel-flat">
+                                                        <div class="panel-heading">
+                                                                <h6 class="panel-title">Informações de Perfil</h6>
+                                                                <div class="heading-elements">
+                                                                        <ul class="icons-list">
+                                                                                <li><a data-action="collapse"></a></li>
+                                                                                <li><a data-action="reload"></a></li>
+                                                                        </ul>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="panel-body" style="height: 424px;">
+                                                                <div class="alert alert-warning alert-styled-left">
+                                                                        <span class="text-semibold">Atenção!</span> Após salvar você será convidado a efetuar novo login.
+                                                                </div>
+                                                                
+                                                                <?php echo $this->Form->create('User', array('type' => 'file', 'accept' => 'image/*', 'onchange' => 'loadFile(event)')); ?>
+                                                                        <?php echo $this->Form->input('id'); ?>
+                                                                        <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-md-5">
+                                                                                                <?php echo $this->Form->input('name', array('label' => 'Nome', 'class' => 'form-control')); ?>
+                                                                                        </div>
+                                                                                        <div class="col-md-4">
+                                                                                                <?php echo $this->Form->input('sector', array('label' => 'Setor', 'class' => 'form-control')); ?>
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                                <?php echo $this->Form->input('phone', array('label' => 'Telefone', 'class' => 'form-control')); ?>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                            
+                                                                        <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-md-6">
+                                                                                                <?php echo $this->Form->input('email', array('label' => 'Login / E-mail', 'class' => 'form-control')); ?>
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                                <?php echo $this->Form->input('new_password', array('type' => 'password', 'label' => 'Nova senha', 'placeholder' => 'password', 'class' => 'form-control')); ?>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                            
+                                                                        <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-md-6">
+                                                                                                <label>Nova Imagem de Perfil</label>                                                                                                
+                                                                                                <?php echo $this->Form->file('uploadfile', array('class' => 'file-styled')); ?> 
+                                                                                                <span class="help-block">Formatos: gif, png, jpg. Máximo 2Mb</span>
+                                                                                                <?php echo $this->Form->input('image_path', array('type' => 'hidden', 'value' => $this->request->data['User']['image_path']));  ?>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                        
+                                                                        <div class="text-right">
+                                                                                <button type="submit" class="btn btn-primary">Salvar <i class="icon-arrow-right14 position-right"></i></button>
+                                                                        </div>
+                                                                <?php echo $this->Form->end(); ?>      
+                                                        </div>
+                                                </div>
+                                                <!-- /profile info -->
+
+                                        </div>
+
+                                        <div class="tab-pane fade" id="settings">
+
+                                                <!-- Account settings -->
+                                                <div class="panel panel-flat">
+                                                        <div class="panel-heading">
+                                                                <h6 class="panel-title">Account settings</h6>
+                                                                <div class="heading-elements">
+                                                                        <ul class="icons-list">
+                                                                                <li><a data-action="collapse"></a></li>
+                                                                                <li><a data-action="reload"></a></li>
+                                                                                <li><a data-action="close"></a></li>
+                                                                        </ul>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="panel-body" style="height: 424px;">
+                                                                <form action="#">
+                                                                        <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-md-6">
+                                                                                                <label>Profile visibility</label>
+
+                                                                                                <div class="radio">
+                                                                                                        <label>
+                                                                                                                <input type="radio" name="visibility" class="styled" checked="checked">
+                                                                                                                Visible to everyone
+                                                                                                        </label>
+                                                                                                </div>
+
+                                                                                                <div class="radio">
+                                                                                                        <label>
+                                                                                                                <input type="radio" name="visibility" class="styled">
+                                                                                                                Visible to friends only
+                                                                                                        </label>
+                                                                                                </div>
+
+                                                                                                <div class="radio">
+                                                                                                        <label>
+                                                                                                                <input type="radio" name="visibility" class="styled">
+                                                                                                                Visible to my connections only
+                                                                                                        </label>
+                                                                                                </div>
+
+                                                                                                <div class="radio">
+                                                                                                        <label>
+                                                                                                                <input type="radio" name="visibility" class="styled">
+                                                                                                                Visible to my colleagues only
+                                                                                                        </label>
+                                                                                                </div>
+                                                                                        </div>
+
+                                                                                        <div class="col-md-6">
+                                                                                                <label>Notifications</label>
+
+                                                                                                <div class="checkbox">
+                                                                                                        <label>
+                                                                                                                <input type="checkbox" class="styled" checked="checked">
+                                                                                                                Password expiration notification
+                                                                                                        </label>
+                                                                                                </div>
+
+                                                                                                <div class="checkbox">
+                                                                                                        <label>
+                                                                                                                <input type="checkbox" class="styled" checked="checked">
+                                                                                                                New message notification
+                                                                                                        </label>
+                                                                                                </div>
+
+                                                                                                <div class="checkbox">
+                                                                                                        <label>
+                                                                                                                <input type="checkbox" class="styled" checked="checked">
+                                                                                                                New task notification
+                                                                                                        </label>
+                                                                                                </div>
+
+                                                                                                <div class="checkbox">
+                                                                                                        <label>
+                                                                                                                <input type="checkbox" class="styled">
+                                                                                                                New contact request notification
+                                                                                                        </label>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+
+                                                                        <div class="text-right">
+                                                                                <button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
+                                                                        </div>
+                                                                </form>
+                                                        </div>
+                                                </div>
+                                                <!-- /account settings -->
+
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <!-- /user profile -->
+
+        <!-- Footer -->
+        <?php echo $this->element('footer'); ?>
+        <!-- /footer -->
+
+</div>
+<!-- /content area -->

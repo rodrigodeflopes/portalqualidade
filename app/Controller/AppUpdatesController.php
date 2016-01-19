@@ -1,5 +1,8 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
+
 /**
  * AppUpdates Controller
  *
@@ -13,7 +16,7 @@ class AppUpdatesController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator', 'Upload');
 
 /**
  * index method
@@ -48,13 +51,30 @@ class AppUpdatesController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->AppUpdate->create();
-			if ($this->AppUpdate->save($this->request->data)) {
-				$this->Session->setFlash(__('The app update has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The app update could not be saved. Please, try again.'));
-			}
+                        debug($this->request->data);
+                        
+//			$this->AppUpdate->create();
+//			if ($this->AppUpdate->save($this->request->data)) {
+//                            
+//                                //Salva o arquivo APK.
+//                                $file = $this->request->data['AppUpdate']['uploadfile'];         
+//                                if (!empty($file['tmp_name'])) {                                                                        
+//                                    //Salva o arquivo de upload.                                                    
+//                                    $file_path = 'files' . DS . 'uploads' . DS . 'appUpdates' . DS . $this->AppUpdate->id;   
+//                                    $allowed = array('apk');                            
+//                                    $file_path_abs = $this->Upload->upload($file, $file_path, $allowed);
+//                                    if (!$file_path_abs) {
+//                                        $this->Session->setFlash(__('Tipo de arquivo não suportado, tente novamete!'),'alert_error');
+//                                        return $this->redirect(array('action' => 'add'));
+//                                    }  
+//                                    $this->request->data['AppUpdate']['app_path'] = DS . $file_path_abs;
+//                                }      
+//                            
+//				$this->Session->setFlash(__('Update salvo com sucesso.'),'alert_success');
+//				return $this->redirect(array('action' => 'index'));
+//			} else {
+//				$this->Session->setFlash(__('O update não pode ser salvo, tente novamente!'),'alert_error');
+//			}
 		}
 	}
 

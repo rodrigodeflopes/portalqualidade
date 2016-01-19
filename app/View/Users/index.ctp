@@ -15,14 +15,14 @@
 
                         <div class="heading-elements">
                                 <div class="heading-btn-group">
-                                        <a href="#" class="btn btn-link btn-float has-text"><i class="icon-add text-primary"></i><span>Adicionar</span></a>
+                                        <a href="users/add" class="btn btn-link btn-float has-text"><i class="icon-add text-primary"></i><span>Adicionar</span></a>
                                 </div>
                         </div>
                 </div>
 
                 <div class="breadcrumb-line">
                         <ul class="breadcrumb">
-                                <li><?php echo $this->Html->link('<i class="icon-people position-left"></i> Usuários', array('action' => 'index'), array('escape' => false)); ?></li>
+                                <li><?php echo $this->Html->link('<i class="icon-users position-left"></i> Usuários', array('action' => 'index'), array('escape' => false)); ?></li>
                         </ul>
                 </div>
         </div>
@@ -31,7 +31,7 @@
 
         <!-- Content area -->
         <div class="content">
-
+                <?php echo $this->Session->flash(); ?> 
                 <!-- Basic datatable -->
                 <div class="panel panel-flat">
                         <div class="panel-heading">
@@ -49,11 +49,10 @@
                                         <tr>
                                                 <th></th>
                                                 <th>Nome</th>
-                                                <th>Email</th>
+                                                <th>Login / Email</th>
                                                 <th>Criado</th>
                                                 <th>Modificado</th>
                                                 <th>Status</th>
-                                                <th class="text-center">Ações</th>
                                         </tr>
                                 </thead>
                                 <tbody>
@@ -64,21 +63,7 @@
                                                         <td><?php echo h($user['User']['email']); ?></td>
                                                         <td><?php echo h($this->Time->format('d/m/Y H:i:s', $user['User']['created'])); ?></td>
                                                         <td><?php echo h($this->Time->format('d/m/Y H:i:s', $user['User']['modified'])); ?></td>
-                                                        <td><span class="label label-success">Active</span></td>
-                                                        <td class="text-center">
-                                                                <ul class="icons-list">
-                                                                        <li class="dropdown">
-                                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                                                        <i class="icon-menu9"></i>
-                                                                                </a>
-
-                                                                                <ul class="dropdown-menu dropdown-menu-right">
-                                                                                        <li><a href="#"><i class=" icon-pencil5"></i> Editar</a></li>
-                                                                                        <li><a href="#"><i class="icon-folder-remove"></i> Excluir</a></li>
-                                                                                </ul>
-                                                                        </li>
-                                                                </ul>
-                                                        </td>
+                                                        <td><span class="<?php echo $user['UserStatus']['cssClass']; ?>"><?php echo $user['UserStatus']['name']; ?></span></td>
                                                 </tr>
                                         <?php endforeach; ?>
                                 </tbody>
