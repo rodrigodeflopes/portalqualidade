@@ -207,6 +207,7 @@ $(function() {
             //alert($('#checked2').is(':checked')); 
             $('#tableItems').DataTable().destroy();
             $('#tableItems').DataTable({
+                //bSort: false,
                 lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
                 ajax: "../items/itemsFound/" + $('#townhouses').val() + '/' + $('#towers').val() + '/' + $('#loc1').val() + '/' + $('#loc2').val() + '/' + $('#services').val() + '/' + $('#checks').val()+ '/' + ($('#checked1').is(':checked') ? '1' : null) + '/' + ($('#checked2').is(':checked') ? '2' : null) + '/' + ($('#checked3').is(':checked') ? '0' : null)
             });

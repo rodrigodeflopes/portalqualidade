@@ -266,7 +266,7 @@
                                                                                                                         </a>
 
                                                                                                                         <ul class="dropdown-menu dropdown-menu-right">
-                                                                                                                                <li><a onclick="group_delete('<?php echo $this->request->data['User']['id']; ?>','<?php echo $belong['Aro']['id']; ?>')"><i class="icon-exit"></i>Sair</a></li>
+                                                                                                                                <li><a onclick="group_delete('<?php echo $this->request->data['User']['id']; ?>','<?php echo $belong['Aro']['id']; ?>')"><i class="icon-exit"></i>Excluir</a></li>
                                                                                                                         </ul>
                                                                                                                 </li>
                                                                                                         </ul>

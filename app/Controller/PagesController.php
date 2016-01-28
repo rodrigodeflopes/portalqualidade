@@ -22,20 +22,11 @@ class PagesController extends AppController {
  */
 	public function index() {
             
-                if ($this->request->is('post')) {
-                    $pages = $this->Acl->Aco->query("
+                $pages = $this->Acl->Aco->query("
                         SELECT * FROM acos AS Aco
                         LEFT JOIN pages AS Page 
                         ON Aco.foreign_key = Page.id
-                        WHERE Aco.alias LIKE '%". $this->request->data['Page']['search'] ."%' OR Page.name LIKE '%". $this->request->data['Page']['search'] ."%'
-                    ");
-                }else{
-                    $pages = $this->Acl->Aco->query("
-                        SELECT * FROM acos AS Aco
-                        LEFT JOIN pages AS Page 
-                        ON Aco.foreign_key = Page.id
-                    ");
-                }                
+                ");
 		$this->set('pages', $pages);
                 //debug($pages);
 	}
@@ -95,7 +86,21 @@ class PagesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($acoId) {
+            
+                $aco = $this->Acl->Aco->findById($acoId);
+                $this->set('aco', $aco);
+                
+                $acoParent = $this->Acl->Aco->findById($aco['Aco']['parent_id']);
+                $this->set('acoParent', $acoParent);
+                //debug($aco);
+                
+                if($aco['Aco']['parent_id'] == 1){
+                    $parentAlias = $aco['Aco']['alias'];
+                }else{
+                    $parentAlias = $acoParent['Aco']['alias'];
+                }
+                
 		if ($this->request->is('post')) {
 			$this->Page->create();
 			if ($this->Page->save($this->request->data)) {
@@ -104,7 +109,8 @@ class PagesController extends AppController {
                                 $aco = new Aco(); 
                                 $aco->create(); 
                                 $aco_options = array( 
-                                    'id' => $this->request->data['Page']['aco_id'], 
+                                    'id' => $acoId,
+                                    'parent_alias' => $parentAlias,
                                     'model' => 'Page', 
                                     'foreign_key' => $this->Page->id
                                 );
@@ -115,7 +121,8 @@ class PagesController extends AppController {
 			} else {
 				$this->Session->setFlash('O Acesso controlado não pode ser salvo. Tente novamente!','alert_error');
 			}
-		}
+		}               
+                
 	}
 
 /**
@@ -132,7 +139,7 @@ class PagesController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Page->save($this->request->data)) {
 				$this->Session->setFlash('Alterações salvas com sucesso!','alert_success');
-				return $this->redirect(array('action' => 'view', $id));
+				return $this->redirect(array('action' => 'edit', $id));
 			} else {
 				$this->Session->setFlash('As alterações não puderam ser salvas, tente novamete!','alert_error');
 			}

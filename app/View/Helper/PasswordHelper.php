@@ -25,7 +25,7 @@ class PasswordHelper extends AppHelper {
                 $password .= $char; 
                 $i++; 
             } 
-        } 
+        }         
         return $password; 
     } 
     

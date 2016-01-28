@@ -4,7 +4,7 @@
     '/assets/js/plugins/tables/datatables/datatables.min',
     '/assets/js/plugins/tables/datatables/extensions/natural_sort',
     '/assets/js/plugins/forms/selects/select2.min',
-    '/assets/js/pages/tasks_list'
+    '/assets/js/pages/checksIndex'
 )); ?>
 <!-- /Theme JS files -->
 
@@ -46,9 +46,6 @@
                                         <th>#</th>
                                         <th>Serviço</th>
                                         <th>Verificação</th>
-                                        <th>Criado</th>
-                                        <th>Modificado</th>
-                                        <th class="text-center">Ações</th>
                                 </tr>
                         </thead>
                         <tbody>
@@ -59,22 +56,6 @@
                                                 <td>
                                                     <div class="text-semibold"><h6><?php echo h($check['Check']['name']); ?></h6></div>
                                                     <div class="text-muted"><?php echo h($check['Check']['method']); ?></div>
-                                                </td>
-                                                <td><?php echo h($this->Time->format('d/m/Y H:i:s', $check['Check']['created'])); ?></td>
-                                                        <td><?php echo h($this->Time->format('d/m/Y H:i:s', $check['Check']['modified'])); ?></td>
-                                                <td class="text-center">
-                                                        <ul class="icons-list">
-                                                                <li class="dropdown">
-                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                                                <i class="icon-menu9"></i>
-                                                                        </a>
-
-                                                                        <ul class="dropdown-menu dropdown-menu-right">
-                                                                                <li><a href="#"><i class=" icon-pencil5"></i> Editar</a></li>
-                                                                                <li><a href="#"><i class="icon-folder-remove"></i> Excluir</a></li>
-                                                                        </ul>
-                                                                </li>
-                                                        </ul>
                                                 </td>
                                         </tr>
                                 <?php endforeach; ?>

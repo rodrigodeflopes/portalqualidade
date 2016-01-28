@@ -69,7 +69,7 @@ class UsersController extends AppController {
                                 $aro_options = array( 
                                     'model' => 'User', 
                                     'foreign_key' => $this->User->id, 
-                                    'parent_id' => 1
+                                    'parent_id' => 2 //Usuários do sistema.
                                 );
                                 if (!$aro->save($aro_options)) {
                                     $this->Session->setFlash(__('Usuário não adicionado na tabela ARO, tente novamete!'),'alert_error');
@@ -421,80 +421,7 @@ class UsersController extends AppController {
 			$this->request->data = $this->User->find('first', $options);
 		}
         } 
-        
-/**
- * Image_edit method
- * Freitas 2014-11-13
- */
-        public function image_edit($id = null) {
-                if (!$this->User->exists($id)) {
-                    throw new NotFoundException(__('Usuário Inválido!'));
-                }
-                else {
-                    if ($this->request->is('post')) {  
-                        if( !empty( $this->request->data)){ 
-                            
-                            //Salva o arquivo de upload.
-                            $data = $this->request->data['User']['uploadfile'];                        
-                            $file_path = 'files' . DS . 'uploads' . DS . 'users' . DS . $id;   
-                            $allowed = array('jpg', 'jpeg', 'png', 'gif');                            
-                            $file_path_abs = $this->Upload->upload($data, $file_path, $allowed);
-                            
-                            if ($file_path_abs) {
-                                //Apaga o arquivo de imagem atual.
-                                $pathToDelete =  substr($this->request->data['User']['image_path'],(strlen($this->request->data['User']['image_path'])-1)*-1);
-                                $file = new File($pathToDelete, false, 0777);
-                                $file->delete();
-                                //edita no campo "image_path" o caminho absoluto da nova imagem.
-                                $this->request->data['User']['id'] = $id;
-                                $this->request->data['User']['image_path'] = DS . $file_path_abs;
-                                if ($this->User->save($this->request->data)) {
-                                    $this->Session->setFlash(__('Imagem alterada com sucesso!'),'alert_success');
-                                    return $this->redirect(array('action' => 'view', $id));
-                                }
-                                else {
-                                    $this->Session->setFlash(__('A imagem de perfil não pode ser alterada, tente novamete!'),'alert_error');
-                                    return $this->redirect(array('action' => 'view', $id));
-                                }
-                            } 
-                            else {
-                                $this->Session->setFlash(__('Tipo de arquivo não suportado, tente novamete!'),'alert_error');
-                                return $this->redirect(array('action' => 'view', $id));
-                            }
-                        }
-                    }
-                    else {
-                        $this->Session->setFlash(__('A imagem de perfil não pode ser alterada, tente novamete!'),'alert_error');
-                        return $this->redirect(array('action' => 'view', $id));
-                    }
-                }
-        }
-
-/**
- * Export CSV method
- * 
- * Plugin carregado em AppControleer public $components ->  'Export.Export',
- * Plugin disponínel na pasta app/plugin
- * Em app/config/Bootstrap -> CakePlugin::loadAll();
- */        
-        public function csv() {
-            $this->User->recursive = -1;
-            $data = $this->User->find('all');
-            $header = array( 'c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11','c12','c13','c14','c15','c16','c17','c18');
-            $this->Export->exportCsv($header, $data,'','',';');
-        }
-        
-/**
- * HighCharts 
- * 
- * 
- */        
-        public function graf() {
-            
-            $dados = $this->Acl->Aco->find('all', array('conditions' => array('foreign_key >' => 0)));
-            $this->set('dados', $dados);
-            //debug($dados);
-        }
+ 
         
 /**
  * Permissões diretas

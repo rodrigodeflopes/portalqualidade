@@ -111,6 +111,7 @@ function inputDataTable(){
     //popular tabela
     $('#tableItems').DataTable().destroy();
     $('#tableItems').DataTable({
+        //bSort: false,
         lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
         ajax: "items/itemsFound/" + $('#townhouses').val() + '/' + $('#towers').val()
     });         

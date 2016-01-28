@@ -1,59 +1,119 @@
-<ul class="breadcrumb">
-    <li><?php echo $this->Html->link(__('Acessos controlados'), array('action' => 'index')); ?> <span class="divider">/</span></li>
-    <li class="active">Dados do acesso</li>
-</ul>
+<!-- Theme JS files -->
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <?php echo $this->Session->flash(); ?>
-        <div class="btn-toolbar">    
-            <?php echo $this->Html->link($this->Html->tag('i', ' Editar', array('class'=>'icon-edit')), array('action'=>'edit', $page['Page']['id']), array('escape' => false, 'class'=>'btn btn-primary')); ?>                      
-        </div>      
+<!-- /Theme JS files -->
 
-        <div class="well"> 
-            <div class="row-fluid">
-                <div class="pull-left" style='position:relative;'>
-                    <?php echo $this->Html->image('/images/lock.jpg', array('class' => 'img-UserGroup')); ?>
+<!-- Page header -->
+<div class="page-header page-header-xs">
+        <div class="page-header-content">
+                <div class="page-title">
+                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">cesso controlado</span></h4>
+
+                        <ul class="breadcrumb position-right">
+                                <li><?php echo $this->Html->link('<i class="icon-stackoverflow position-left"></i> Acessos controlados', array('action' => 'index'), array('escape' => false)); ?></li>
+                                <li class="active">Acesso controlado</li>
+                        </ul>
                 </div>
-                <div class="pull-left" style="margin-left: 40px;">
-                    <h2><?php echo h($page['Page']['name']); ?></h2>
-                    <p><strong>Visível: </strong><?php echo h($page['Page']['enable']); ?></p>
-                    <p><strong>Criado: </strong><?php echo h($this->Time->format('d/m/Y H:i:s', $page['Page']['created'])); ?></p>
-                    <p><strong>Modificado: </strong><?php echo h($this->Time->format('d/m/Y H:i:s', $page['Page']['modified'])); ?></p>
-                </div>   
-            </div>
-            <br>
-            <div>
-                <ul class="nav nav-tabs">
-                  <li class="active"><a href="#belogsto" data-toggle="tab">Acesso Permitido à</a></li>
-                </ul>  
-                <div id="myTabContent" class="tab-content">  
-                    <div class="tab-pane active in" id="belogsto">                        
-                        <div class="well">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 26px;">Avatar</th> 
-                                        <th>Nome</th> 
-                                        <th class="actions">Ações</th>
-                                    </tr>
-                                <thead>
-                                <tbody>                              
-                                    <?php foreach ($usersGroups as $usersGroup): ?>
-                                        <tr>
-                                            <td><?php echo $this->Html->image($usersGroup['image_path'], array('class' => 'img-face1')); ?></td>            
-                                            <td><?php echo $this->Html->link(h($usersGroup['name']), array('controller'=> $usersGroup['controller'] ,'action'=>'view', $usersGroup['id']), array('escape' => false)); ?>&nbsp;</td>    
-                                            <td>
-                                                <strong><?php echo $this->Html->link($this->Html->tag('i', ' Ver', array('class'=>'icon-eye-open')), array('controller'=> $usersGroup['controller'] ,'action'=>'view', $usersGroup['id']), array('escape' => false)); ?></strong>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>                       
-                    </div>                    
-                </div>
-            </div>
         </div>
-    </div>
+
+        <!-- Toolbar -->
+        <div class="navbar navbar-default navbar-xs">
+                <ul class="nav navbar-nav visible-xs-block">
+                        <li class="full-width text-center"><a data-toggle="collapse" data-target="#navbar-filter"><i class="icon-menu7"></i></a></li>
+                </ul>
+
+                <div class="navbar-collapse collapse" id="navbar-filter">
+                        <ul class="nav navbar-nav element-active-slate-400">
+                                <li class="active"><a href="#profile" data-toggle="tab"><i class="icon-stackoverflow position-left"></i> Perfil</a></li>
+                                <li><a href="#access" data-toggle="tab"><i class="icon-user-lock position-left"></i> Controle de acesso</a></li>
+                        </ul>
+                </div>
+        </div>
+        <!-- /toolbar -->
 </div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+        <?php echo $this->Session->flash(); ?> 
+        <!-- Page profile -->        
+        <div class="tabbable">
+                <div class="tab-content">                                        
+                        <div class="tab-pane fade in active" id="profile">
+                                <!-- Profile info -->
+                                <div class="panel panel-flat">
+                                        <div class="panel-heading">
+                                                <h6 class="panel-title">Informações do acesso controlado</h6>
+                                                <div class="heading-elements">
+                                                        <ul class="icons-list">
+                                                                <li><a data-action="collapse"></a></li>
+                                                                <li><a data-action="reload"></a></li>
+                                                        </ul>
+                                                </div>
+                                        </div>
+
+                                        <div class="panel-body">   
+                                                        <div class="form-group">
+                                                                <label class="control-label col-lg-2">Nome:</label> <?php echo $page['Page']['name']; ?>
+                                                        </div>
+                                            
+                                                        <div class="form-group">
+                                                                <label class="control-label col-lg-2">Visível:</label> <?php if($page['Page']['enable']){ echo 'Sim';}else{echo 'Não';} ?>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-lg-2"><i class=" icon-laptop"></i>&nbsp; Criado:</label> <span><?php echo h($this->Time->format('d/m/Y H:i', $page['Page']['created'])); ?></span>
+                                                        </div>
+
+                                                        <div class="text-right">
+                                                                <?php echo $this->Html->link('Editar <i class="icon-pencil5 position-right"></i>', array('action' => 'edit', $page['Page']['id']), array('escape' => false, 'class' => 'btn btn-primary')); ?>
+                                                        </div>
+
+                                        </div>
+                                </div>
+                                <!-- /profile info -->
+                        </div>
+                        <div class="tab-pane fade" id="access">
+                                <!-- Allow info -->
+                                <div class="panel panel-flat">
+                                        <div class="panel-heading">
+                                                <h6 class="panel-title">Acesso permitido à <?php echo $page['Page']['name']; ?></h6>
+                                                <div class="heading-elements">
+                                                        <ul class="icons-list">
+                                                                <li><a data-action="collapse"></a></li>
+                                                                <li><a data-action="reload"></a></li>
+                                                        </ul>
+                                                </div>
+                                        </div>
+
+                                        <table class="table datatable-basic">
+                                                <thead>
+                                                        <tr>
+                                                                <th></th>
+                                                                <th>Nome</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <?php foreach ($usersGroups as $usersGroup): ?>
+                                                                <tr>
+                                                                        <td><?php echo $this->Html->image($usersGroup['image_path'], array('class' => 'img-circle img-sm')); ?></td>
+                                                                        <td><?php echo $this->Html->link(h($usersGroup['name']), array('controller'=> $usersGroup['controller'] ,'action'=>'view', $usersGroup['id']), array('escape' => false)); ?></td>
+                                                                </tr>
+                                                        <?php endforeach; ?>
+                                                </tbody>
+                                        </table>
+                                </div>
+                                <!-- /Allow info -->
+
+
+                        </div>
+                </div>
+        </div>
+        <!-- /Page profile -->
+
+        <!-- Footer -->
+        <?php echo $this->element('footer'); ?>
+        <!-- /footer -->
+
+</div>
+<!-- /content area -->

@@ -243,15 +243,20 @@ class TransfersController extends AppController {
                     ));
                     //debug($items);
                     
-                    //$this->loadModel('Tower');
-                    $tower = $this->Transfer->Tower->find('first', array(
-                        'recursive' => 0,
+                    $this->loadModel('Tower');
+                    $tower = $this->Tower->find('first', array(
+                        'recursive' => -2,
+                        'contain' => array(
+                            'Townhouse.Enterprise',
+                            'Townhouse'
+                        ),
                         'conditions' => array(
                             'Tower.id =' => $tower_id
                         )
                     ));
                     //debug($tower);
-                                   
+                    
+                    $countChecked = 0;               
                     foreach ($items as $item):                                                
                         $newItems[] = array( 
                             'id' => $item['Item']['id'],
@@ -265,20 +270,26 @@ class TransfersController extends AppController {
                             'note' => $item['Item']['lastNote'],
                             'image' => '',
                         );
+                        if($item['Item']['lastChecked'] > 0){ $countChecked++; }
                     endforeach; 
 
                     $output = array('Item' => $newItems);
 
                     //adicionando tag de informações e juntando com items.
                     $arrayInfo = array('Info' => array(
+                        'enterprise_id' => $tower['Townhouse']['Enterprise']['id'],
+                        'enterpriseName' => $tower['Townhouse']['Enterprise']['name'],
+                        'towhouse_id' => $tower['Townhouse']['id'],
+                        'townhouseName' => $tower['Townhouse']['name'],
                         'tower_id' => $tower['Tower']['id'], 
                         'towerName' => $tower['Tower']['name'],
-                        'enterprise_id' => $tower['Townhouse']['id'],
-                        'enterpriseName' => $tower['Townhouse']['name'],
+                        
                         'countItems' => count($items),
-                        'countChecked' => 0,
+                        'countChecked' => $countChecked,
                         'fileDate' => date('Y-m-d')
                     ));
+                    //debug($arrayInfo);
+                    
                     $output = Set::merge($arrayInfo, $output);
 
                     //Conversão do array em JSON.
@@ -317,7 +328,7 @@ class TransfersController extends AppController {
 /**
  * app update
  */        
-        public function appUpdate($uuid, $appVersion) { 
+        public function appUpdate($idUpdate, $uuid, $appVersion) { 
             $this->layout = 'ajax';
             $this->autoRender = false;
             
@@ -325,9 +336,13 @@ class TransfersController extends AppController {
             $this->loadModel('Device');
             $this->Device->recursive = 0;
             $device = $this->Device->find('first', array('conditions' => array('uuid' => $uuid)));                
-            if($device){                 
+            if($device){    
+                
+                $this->loadModel('AppUpdate');
+                $appUpdate = $this->AppUpdate->findById($idUpdate);
+                //debug($appUpdate);
                 $this->response->file(
-                    "files/downloads/app_updates/current_update/android-debug.apk",
+                    $appUpdate['AppUpdate']['app_path'],
                     array(
                         'download' => true
                     )

@@ -1,63 +1,90 @@
-<ul class="breadcrumb">
-    <li><?php echo $this->Html->link(__('Acessos controlados'), array('action' => 'index')); ?> <span class="divider">/</span></li>
-    <li><?php echo $this->Html->link(__('Dados do acesso'), array('action' => 'view', $this->data['Page']['id'])); ?> <span class="divider">/</span></li>
-    <li class="active">Editar do acesso</li>
-</ul>
+<!-- Theme JS files -->
+<?php echo $this->Html->script(array(
+    '/assets/js/plugins/forms/styling/uniform.min',
+    '/assets/js/plugins/notifications/bootbox.min',
+    '/assets/js/plugins/notifications/sweet_alert.min',
+    '/assets/js/pages/pagesEdit'
+)); ?>
+<!-- /Theme JS files -->
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <?php echo $this->Session->flash(); ?>
+<!-- Page header -->
+<div class="page-header page-header-xs">
+        <div class="page-header-content">
+                <div class="page-title">
+                        <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">cesso controlado</span></h4>
 
-        <div class="btn-toolbar">        
-            <?php echo $this->Html->link($this->Html->tag('i', ' Salvar', array('class'=>'icon-save')), '#SaveModal', array('escape' => false, 'data-toggle'=>'modal', 'class'=>' btn btn-primary')); ?>
-            <?php echo $this->Html->link($this->Html->tag('i', ' Deletar', array('class'=>'icon-remove')), '#DeleteModal', array('escape' => false, 'data-toggle'=>'modal', 'class'=>' btn btn-danger')); ?>
-        </div>      
+                        <ul class="breadcrumb position-right">
+                                <li><?php echo $this->Html->link('<i class="icon-stackoverflow position-left"></i> Acessos controlados', array('action' => 'index'), array('escape' => false)); ?></li>
+                                <li><?php echo $this->Html->link('Acesso controlado', array('action' => 'view', $this->request->data['Page']['id']), array('escape' => false)); ?></li>
+                                <li class="active">Editar Acesso controlado</li>
+                        </ul>
+                </div>
+        </div>
 
-        <div class="well">
-        <?php echo $this->Form->create('Page'); ?>
-            <?php echo $this->Form->input('id'); ?>
+        <!-- Toolbar -->
+        <div class="navbar navbar-default navbar-xs">
+                <ul class="nav navbar-nav visible-xs-block">
+                        <li class="full-width text-center"><a data-toggle="collapse" data-target="#navbar-filter"><i class="icon-menu7"></i></a></li>
+                </ul>
 
-            <div class="toc">
-                <?php echo $this->Html->image('/images/lock.jpg', array('class' => 'img-UserGroup')); ?>
-            </div>
-            <?php 
-                echo $this->Form->input('name', array('label' => 'Nome', 'class' => 'span3'));
-                echo $this->Form->input('enable', array('label' => 'Visível'));
-            ?>
-
-            <div class="modal small hide fade" id="SaveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel">Confirmação</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Deseja salvar as alterações?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                        <button class="btn btn-primary"><i class="icon-save"></i> Salvar</button>
-                    </div>
-            </div> 
-            
-        <?php echo $this->Form->end(); ?>  
-        
-        <?php echo $this->Form->create('Page', array('action' => 'delete', $this->data['Page']['id'])); ?>
-            <div class="modal small hide fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel">Confirmação</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Deseja realmente deletar este Grupo?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                        <button class="btn btn-danger"><i class="icon-remove"></i> Deletar</button>
-                    </div>
-            </div>
-        <?php echo $this->Form->end(); ?>      
-          
-    </div>
-    </div>
+                <div class="navbar-collapse collapse" id="navbar-filter">
+                        <ul class="nav navbar-nav element-active-slate-400">
+                                <li class="active"><a href="#profile" data-toggle="tab"><i class="icon-stackoverflow position-left"></i> Perfil</a></li>
+                        </ul>
+                </div>
+        </div>
+        <!-- /toolbar -->
 </div>
+<!-- /page header -->
 
+
+<!-- Content area -->
+<div class="content">
+        <?php echo $this->Session->flash(); ?> 
+        <!-- Page profile -->        
+        <div class="tabbable">
+                <div class="tab-content">                                        
+                        <div class="tab-pane fade in active" id="profile">
+                                <!-- Profile info -->
+                                <div class="panel panel-flat">
+                                        <div class="panel-heading">
+                                                <h6 class="panel-title">Informações do acesso controlado</h6>
+                                                <div class="heading-elements">
+                                                        <ul class="icons-list">
+                                                                <li><a data-action="collapse"></a></li>
+                                                                <li><a data-action="reload"></a></li>
+                                                        </ul>
+                                                </div>
+                                        </div>
+
+                                        <div class="panel-body"> 
+                                                <?php echo $this->Form->create('Page'); ?>
+                                                        <?php echo $this->Form->input('id'); ?>
+                                                        <div class="form-group">
+                                                                <?php echo $this->Form->input('name', array('label' => 'Nome', 'class' => 'form-control')); ?>
+                                                        </div>
+                                            
+                                                        <div class="form-group">
+                                                                <?php echo $this->Form->input('enable', array('label' => 'Visível', 'class' => 'control-primary')); ?>
+                                                        </div>
+
+                                                        <div class="text-right">
+                                                                <button type="submit" class="btn btn-primary">Salvar <i class="icon-arrow-right14 position-right"></i></button>
+                                                                <button type="button" class="btn btn-danger" onclick="page_delete('<?php echo $this->request->data['Page']['id']; ?>')">Excluir <i class="icon-folder-remove position-right"></i></button>
+                                                        </div>
+                                                <?php echo $this->Form->end(); ?>
+                                        </div>
+                                </div>
+                                <!-- /profile info -->
+
+                        </div>
+                </div>
+        </div>
+        <!-- /Page profile -->
+
+        <!-- Footer -->
+        <?php echo $this->element('footer'); ?>
+        <!-- /footer -->
+
+</div>
+<!-- /content area -->

@@ -1,50 +1,78 @@
-<ul class="breadcrumb">
-    <li class="active">Grupos de usuários</li>
-</ul>
+<!-- Theme JS files -->
+<?php echo $this->Html->script(array(
+    '/assets/js/plugins/tables/datatables/datatables.min',
+    '/assets/js/plugins/forms/selects/select2.min',
+    '/assets/js/pages/datatables_basic.js'
+)); ?>
+<!-- /Theme JS files -->
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <?php echo $this->Session->flash(); ?>
+<!-- Page header -->
+        <div class="page-header page-header-xs">
+                <div class="page-header-content">
+                        <div class="page-title">
+                                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"> Grupos de usuários</span></h4>
+                        </div>
 
-        <div class="search-well">
-            <div class="pull-right">
-                <?php echo $this->Html->link($this->Html->tag('i', ' Acessos Controlados', array('class'=>'icon-user')), array('controller'=>'pages', 'action'=>'index'), array('escape' => false, 'class'=>'btn btn-primry')); ?>
-            </div>
-            <?php echo $this->Form->create('Group', array('action' => 'index', 'class' => 'form-inline')); ?> 
-                <div class="row-fluid">
-                    <?php echo $this->Html->link($this->Html->tag('i', ' Adicionar', array('class'=>'icon-plus')), array('action'=>'add'), array('escape' => false, 'class'=>'btn btn-primary pull-left')); ?>
-                    <div class="pull-left" style="margin-left: 3px"><?php echo $this->Form->input('search', array('label' => '', 'placeholder' => 'Procurar...')); ?></div>
-                    <div class="pull-left" style="margin-left: 3px"><button class="btn"><i class="icon-search"></i> ir</button>
+                        <div class="heading-elements">
+                                <div class="heading-btn-group">
+                                        <a href="groups/add" class="btn btn-link btn-float has-text"><i class="icon-add text-primary"></i><span>Adicionar</span></a>
+                                </div>
+                        </div>
                 </div>
-            <?php echo $this->Form->end(); ?>  
-        </div>    
 
-        <div class="well">
-                <h3><?php echo __('Grupos de usuários'); ?></h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th style="width: 26px;">Avatar</th>
-                            <th>Nome</th>      
-                            <th>Criado</th>
-                            <th>Modificado</th>                                
-                            <th class="actions">Ações</th>
-                        </tr>
-                    <thead>
-                    <tbody>                              
-                        <?php foreach ($groups as $group): ?>
-                            <tr>
-                                <td><?php echo $this->Html->image($group['Group']['image_path'], array('class' => 'img-face1')); ?></td>
-                                <td><?php echo $this->Html->link(h($group['Group']['name']), array('action'=>'view', $group['Group']['id']), array('escape' => false)); ?>&nbsp;</td>
-                                <td><?php echo h($this->Time->format('d/m/Y H:i:s', $group['Group']['created'])); ?>&nbsp;</td>
-                                <td><?php echo h($this->Time->format('d/m/Y H:i:s', $group['Group']['modified'])); ?>&nbsp;</td>                                
-                                <td>
-                                    <strong><?php echo $this->Html->link($this->Html->tag('i', ' Ver', array('class'=>'icon-eye-open')), array('action'=>'view', $group['Group']['id']), array('escape' => false)); ?></strong>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-        </div>                       
-    </div>       
-</div>   
+                <div class="breadcrumb-line">
+                        <ul class="breadcrumb">
+                                <li><?php echo $this->Html->link('<i class="icon-users4 position-left"></i> Grupos de usuários', array('action' => 'index'), array('escape' => false)); ?></li>
+                        </ul>
+                </div>
+        </div>
+        <!-- /page header -->
+
+
+        <!-- Content area -->
+        <div class="content">
+                <?php echo $this->Session->flash(); ?> 
+                <!-- Basic datatable -->
+                <div class="panel panel-flat">
+                        <div class="panel-heading">
+                                <h5 class="panel-title">Lista de grupos</h5>
+                                <div class="heading-elements">
+                                        <ul class="icons-list">
+                                                <li><a data-action="collapse"></a></li>
+                                                <li><a data-action="reload"></a></li>
+                                        </ul>
+                                </div>
+                        </div>
+
+                        <table class="table datatable-basic">
+                                <thead>
+                                        <tr>
+                                                <th></th>
+                                                <th>Nome</th>
+                                                <th>Criado</th>
+                                                <th>Modificado</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <?php foreach ($groups as $group): ?>
+                                                <tr>
+                                                        <td><?php echo $this->Html->image($group['Group']['image_path'], array('class' => 'img-circle img-sm')); ?></td>
+                                                        <td><?php echo $this->Html->link(h($group['Group']['name']), array('action'=>'view', $group['Group']['id']), array('escape' => false)); ?></td>
+                                                        <td><?php echo h($this->Time->format('d/m/Y H:i:s', $group['Group']['created'])); ?></td>
+                                                        <td><?php echo h($this->Time->format('d/m/Y H:i:s', $group['Group']['modified'])); ?></td>
+                                                </tr>
+                                        <?php endforeach; ?>
+                                </tbody>
+                        </table>
+                </div>
+                <!-- /basic datatable -->
+
+                <!-- Footer -->
+                <?php echo $this->element('footer'); ?>
+                <!-- /footer -->
+
+        </div>
+        <!-- /content area -->
+
+</div>
+<!-- /main content -->

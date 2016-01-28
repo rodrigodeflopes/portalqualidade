@@ -115,6 +115,59 @@ class ItemsController extends AppController {
 		return $this->redirect(array('action' => 'index'));
 	}
        
+        
+/**
+ * overview method
+ *
+ */
+	public function overview() {      
+            
+            $towers = $this->Item->Tower->find('all', array(
+                'recursive' => -1,
+                'conditions' => array(
+                    'Tower.townhouse_id' => 1
+                )
+            ));
+            //debug($towers);
+            
+            $result = array();
+            foreach($towers as $tower) {   
+                
+                $items = $this->Item->query("
+                    SELECT Location2.id, Location2.name, COUNT(Item.id) as total, SUM( IF(Item.lastChecked=1,1,0)) AS totalC, SUM( IF(Item.lastChecked=2,1,0)) AS totalNC
+                    FROM location2s AS Location2  
+                    
+                    LEFT JOIN items AS Item
+                    ON Item.location2_id = Location2.id
+                        
+                    WHERE Item.tower_id = " . $tower['Tower']['id'] . " 
+                    GROUP BY Item.location2_id
+                    
+                ");
+                
+                $result[] = array(
+                    'towerId' => $tower['Tower']['id'],
+                    'towerName' => $tower['Tower']['name'],
+                    'Item' => $items
+                );
+                
+            }
+            //debug($result);
+            $this->set('items', $result);
+            
+        }
+        
+/**
+ * overviewList method
+ *
+ */
+	public function overviewList($towerId, $location2Id) {    
+            
+            $this->set(array('towerId' => $towerId, 'location2Id' => $location2Id));
+            
+        }
+        
+        
 /**
  * research method
  *
@@ -194,7 +247,7 @@ class ItemsController extends AppController {
                     )
                 ),
                 'conditions' => $conditions,
-                'limit' => 1500
+                'limit' => 2000
             ));
             //debug($items);
             

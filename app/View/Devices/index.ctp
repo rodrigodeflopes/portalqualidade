@@ -71,7 +71,13 @@
                                                 <td><?php echo h($device['Device']['uuid']); ?>&nbsp;</td>
                                                 <td><?php echo h($device['Device']['platform']); ?>&nbsp;</td>
                                                 <td><?php echo h($device['Device']['version']); ?>&nbsp;</td>
-                                                <td><?php echo h($device['Device']['app_version']); ?>&nbsp;</td>
+                                                
+                                                <?php if($device['Device']['app_version'] === $currentUpdate['AppUpdate']['name']){ ?>
+                                                        <td><span class="label label-success heading-text" heading-text"><?php echo $device['Device']['app_version']; ?></span></td>
+                                                <?php }else { ?>
+                                                        <td><span class="label label-warning heading-text" heading-text"><?php echo $device['Device']['app_version']; ?></span></td>
+                                                <?php } ?>        
+                                                
                                                 <td><?php echo h($this->Time->format('d/m/Y H:i:s', $device['Device']['created'])); ?>&nbsp;</td>
                                                 <td><?php echo h($this->Time->format('d/m/Y H:i:s', $device['Device']['modified'])); ?>&nbsp;</td>              
                                                 <td class="text-center">

@@ -40,10 +40,10 @@
                                                 <!-- Version -->
                                                 <div class="panel panel-flat" id="id<?php echo $appUpdate['AppUpdate']['id']; ?>">
                                                         <div class="panel-heading">
-                                                                <h5 class="panel-title">Versão <?php echo $appUpdate['AppUpdate']['name']; ?></h5>
+                                                                <?php echo $this->Html->link('<h5 class="panel-title">Versão ' . $appUpdate['AppUpdate']['name'] . '</h5>', array('action' => 'view', $appUpdate['AppUpdate']['id']), array('escape' => false)); ?>
                                                                 <div class="heading-elements">
                                                                         <span class="text-muted heading-text"><?php echo h($this->Time->format('d/m/Y', $appUpdate['AppUpdate']['created'])); ?></span>
-                                                                        <span class="label bg-blue heading-text">v. <?php echo $appUpdate['AppUpdate']['name']; ?></span>
+                                                                        <span class="<?php echo $appUpdate['AppUpdateStatus']['cssClass']; ?> heading-text" heading-text"><?php echo $appUpdate['AppUpdateStatus']['name']; ?></span>
                                                                 </div>
                                                         </div>
 

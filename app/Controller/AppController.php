@@ -63,10 +63,10 @@ class AppController extends Controller {
         if($this->Auth->User('id')){
             //Obtem a lista de Paginas permitidas pelo usuÃ¡rio para a montagem do menu.
             $pages = $this->Acl->Aco->query("
-                SELECT Aco.id, Aco.alias, Page.id, Page.name FROM acos AS Aco
+                SELECT Aco.id, Aco.alias, Page.id, Page.name 
+                FROM acos AS Aco
                 LEFT JOIN pages AS Page 
                 ON Aco.foreign_key = Page.id AND Page.enable = 1   
-                WHERE Aco.parent_id = 1    
             ");
             $accesses = array();        
             foreach ($pages as $page){
@@ -75,8 +75,12 @@ class AppController extends Controller {
                     $check_permission = $this->Acl->check(array('User' => array('id' => $this->Auth->User('id'))), array('Page' => array('id' => $page['Page']['id'])));
                     if ($check_permission) {
                         $accesses[] = array(
-                            'pageName' => $page['Page']['name'],
-                            'acoAlias' => $page['Aco']['alias']
+                            'Permission' => array(
+                                'pageId' => $page['Page']['id'],
+                                'pageName' => $page['Page']['name'],
+                                'acoId' => $page['Aco']['id'],
+                                'acoAlias' => $page['Aco']['alias']
+                            )
                         ); 
                     }
                 } 

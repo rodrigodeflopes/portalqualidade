@@ -24,9 +24,11 @@ class AppUpdatesController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->AppUpdate->recursive = 0;
-                $appUpdates = $this->Paginator->paginate();
+                $appUpdates = $this->AppUpdate->find('all', array(
+                    'order' => 'AppUpdate.id DESC'
+                ));
 		$this->set('appUpdates', $appUpdates);
+                //debug($appUpdates);
 	}
 
 /**

@@ -59,14 +59,14 @@
                                 </div>
                                 <div class="col-md-2">
                                         <div class="content-group">
-                                                <h6 class="text-semibold no-margin"><i class="icon-thumbs-up3 text-success position-left"></i> <?php echo round(($totalC/($totalC + $totalNC))*100,2) . " %"; ?></h6>
+                                                <h6 class="text-semibold no-margin"><i class="icon-thumbs-up3 text-success position-left"></i> <?php if($totalC + $totalNC > 0) { echo round(($totalC/($totalC + $totalNC))*100,2) . " %"; } ?></h6>
                                                 <span class="text-muted text-size-small">% Conformidades </span>
                                         </div>
                                 </div>
 
                                 <div class="col-md-2">
                                         <div class="content-group">
-                                                <h6 class="text-semibold no-margin"><i class="icon-thumbs-down3 text-danger position-left"></i> <?php echo round(($totalNC/($totalC + $totalNC))*100,2) . " %"; ?></h6>
+                                                <h6 class="text-semibold no-margin"><i class="icon-thumbs-down3 text-danger position-left"></i> <?php if($totalC + $totalNC > 0) { echo round(($totalNC/($totalC + $totalNC))*100,2) . " %"; } ?></h6>
                                                 <span class="text-muted text-size-small">% N. Conformidads</span>
                                         </div>
                                 </div>

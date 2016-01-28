@@ -20,25 +20,24 @@ class DevicesController extends AppController {
  *
  * @return void
  */
-	public function index() {                
-                $this->Device->recursive = 0;
-                                
-                if ($this->request->is('post')) {
+	public function index() {              
+                $devices = $this->Device->find('all');
+                $this->set('devices', $devices);
+                //debug($devices);
                 
-                    $doctors = $this->Device->find('all', array( 
-                        'conditions' => array('OR' => array(
-                            'Device.name LIKE' => "%".$this->request->data['Device']['search']."%",
-                            'Device.model LIKE' => "%".$this->request->data['Device']['search']."%",
-                            'Device.uuid LIKE' => "%".$this->request->data['Device']['search']."%",
-                            'Device.platform LIKE' => "%".$this->request->data['Device']['search']."%",
-                            'Device.version LIKE' => "%".$this->request->data['Device']['search']."%",
-                        ))
-                    ));
-                    $this->set('devices', $doctors);
-                }
-                else {
-                    $this->set('devices', $this->Device->find('all'));                    
-                }
+                //Update atual
+                $this->loadModel('AppUpdate');
+                $currentUpdate = $this->AppUpdate->find('first', array(
+                    'conditions' => array(
+                        'app_update_status_id' => '1'
+                    ),
+                    'fields' => array(
+                        'AppUpdate.name'
+                    )
+                ));
+                $this->set('currentUpdate', $currentUpdate);
+                //debug($currentUpdate);
+                
 	}
 
 /**
