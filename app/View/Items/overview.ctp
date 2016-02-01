@@ -2,11 +2,9 @@
 <?php echo $this->Html->script(array(
     '/assets/js/pages/itemsOverview',
     '/assets/js/plugins/forms/styling/uniform.min',
-    '/assets/js/plugins/notifications/pnotify.min',
-    '/assets/js/plugins/forms/selects/bootstrap_multiselect',        
+    '/assets/js/plugins/notifications/pnotify.min',        
     '/assets/js/pages/components_modals',
-    '/assets/js/pages/form_multiselect',
-    '/assets/js/plugins/forms/selects/bootstrap_multiselect'
+    '/assets/js/plugins/forms/selects/bootstrap_select.min',
 )); ?>
 <!-- /Theme JS files -->
 
@@ -16,18 +14,23 @@
                 <div class="page-title">
                         <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Terminalidades</span></h4>
                 </div>
+                 
+                <div class="heading-elements">
+                        <?php echo $this->Form->create('Item'); ?>
+                                <div class="form-group">
+                                        <div class="has-feedback">                                                 
+                                                <?php echo $this->Form->input('townhouses_id', array('label' => false, 'class' => 'bootstrap-select')); ?>                                                  
+                                        </div>
+                                </div>
+                        <?php echo $this->Form->end(); ?>  
+                </div>
+            
         </div>
 
         <div class="breadcrumb-line">
                 <ul class="breadcrumb">
                         <li><?php echo $this->Html->link('<i class="icon-office position-left"></i> Terminalidades', array('action' => 'index'), array('escape' => false)); ?></li>
                 </ul>
-            
-                <div class="heading-elements">
-                        <div class="multi-select-full">
-                                <select class="multiselect-xs" id="townhouses"></select>
-                        </div>
-                </div>
         </div>
 </div>
 <!-- /page header -->

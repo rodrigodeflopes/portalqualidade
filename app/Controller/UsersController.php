@@ -61,8 +61,16 @@ class UsersController extends AppController {
                         $this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);   
                         
                         //Salva os dados de usuário.
-			$this->User->create();
-			if ($this->User->save($this->request->data)) {                                
+			$this->User->create();                        
+			if ($this->User->save($this->request->data)) {     
+                            
+                                //Criação de imagem de perfil comum
+                                $file = new File('img/anonymous.png');
+                                $dir = new Folder('files/uploads/users/' . $this->User->id, true, 0755);
+                                $file->copy($dir->path . DS . $file->name);
+                                $this->User->save(array('User' => array('image_path' => '/files/uploads/users/' . $this->User->id . '/anonymous.png')));
+                                
+                            
                                 //Inserção do aro.
                                 $aro = new Aro(); 
                                 $aro->create(); 
@@ -228,6 +236,7 @@ class UsersController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->User->delete()) {                    
+                        
                         //Delete Aros
                         // Ao deletar Aros automaticamente são excluído as permissões em Aros_Acos.
                         $Aros = $this->Acl->Aro->find('list', array('conditions' => array(
@@ -237,7 +246,12 @@ class UsersController extends AppController {
                         foreach ($Aros as $Aro) {    
                             $this->Acl->Aro->id = $Aro;
                             $this->Acl->Aro->delete(); 
-                        }                            
+                        }  
+                        
+                        //Delete folder in upload file
+                        $folder = new Folder('files/uploads/users/' . $id);
+                        $folder->delete();
+                        
 			$this->Session->setFlash(__('Usuário excluido com sucesso!'),'alert_success');
 		} else {
 			$this->Session->setFlash(__('O usuário não pode ser excluido, tente novamete!'),'alert_error');

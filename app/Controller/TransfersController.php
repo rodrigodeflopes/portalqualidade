@@ -277,8 +277,8 @@ class TransfersController extends AppController {
 
                     //adicionando tag de informações e juntando com items.
                     $arrayInfo = array('Info' => array(
-                        'enterprise_id' => $tower['Townhouse']['Enterprise']['id'],
-                        'enterpriseName' => $tower['Townhouse']['Enterprise']['name'],
+                        'enterprise_id' => $tower['Townhouse']['id'], //$tower['Townhouse']['Enterprise']['id'],
+                        'enterpriseName' => $tower['Townhouse']['name'], //$tower['Townhouse']['Enterprise']['name'],
                         'towhouse_id' => $tower['Townhouse']['id'],
                         'townhouseName' => $tower['Townhouse']['name'],
                         'tower_id' => $tower['Tower']['id'], 
@@ -312,11 +312,9 @@ class TransfersController extends AppController {
                         array(
                                 'download' => true
                         )
-                    );
-                    
+                    );                    
                     return $this->response;
-                }else{
-                    
+                }else{                    
                     return false;
                 }
                 

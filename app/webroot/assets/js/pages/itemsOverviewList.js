@@ -9,8 +9,10 @@ function inputDataTable(towerId, location2Id){
     $('#tableItems').DataTable().destroy();
     $('#tableItems').DataTable({
         //bSort: false,
-        lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
-        ajax: "/portalqualidade/items/itemsFound/null/" + towerId + "/null/" + location2Id
+        "processing": true,
+        "serverSide": true,
+        "lengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
+        "ajax": "/portalqualidade/items/itemsFound/null/" + towerId + "/null/" + location2Id
     });         
 }
 

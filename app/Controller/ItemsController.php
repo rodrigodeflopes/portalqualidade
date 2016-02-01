@@ -122,10 +122,22 @@ class ItemsController extends AppController {
  */
 	public function overview() {      
             
+            //Twonhouses list select
+            $this->loadModel('Townhouse');
+            $townhouses = $this->Townhouse->find('list', array(
+                'conditions' => array(
+                    'Townhouse.enterprise_id' => $this->Session->read('enterpriseId')
+                )
+            ));
+            $this->set(compact('townhouses'));
+            //debug($townhouses);
+            
+            
+            // Terminalidades
             $towers = $this->Item->Tower->find('all', array(
                 'recursive' => -1,
                 'conditions' => array(
-                    'Tower.townhouse_id' => 1
+                    'Tower.townhouse_id' => !empty($this->request->data) ? $this->request->data['Item']['townhouses_id'] : key($townhouses)
                 )
             ));
             //debug($towers);
@@ -153,7 +165,7 @@ class ItemsController extends AppController {
                 
             }
             //debug($result);
-            $this->set('items', $result);
+            $this->set('items', $result);            
             
         }
         
@@ -231,6 +243,11 @@ class ItemsController extends AppController {
             //debug($conditions);
             //debug($this->request); 
             
+            //Total de Itens
+            $totalItems = $this->Item->find('count', array(   
+                'conditions' => $conditions
+            ));
+            
             //lista de Itens
             //OBS.  o containable só funciona se colocado (public $actsAs = array('Containable'); em appModel.
             $items = $this->Item->find('all', array(    
@@ -247,7 +264,8 @@ class ItemsController extends AppController {
                     )
                 ),
                 'conditions' => $conditions,
-                'limit' => 2000
+                'offset' => $this->request->query['start'],
+                'limit' => $this->request->query['length']
             ));
             //debug($items);
             
@@ -281,7 +299,7 @@ class ItemsController extends AppController {
                     $actions
                 ); 
             }        
-            $result = array('draw' => 10, 'recordsTotal' => count($result), 'recordsFiltered' => count($result), 'data' => $result);   
+            $result = array('draw' => $this->request->query['draw'] + 1, 'recordsTotal' => $totalItems, 'recordsFiltered' => $totalItems, 'data' => $result);   
             //debug($result);
             
             echo json_encode($result);              

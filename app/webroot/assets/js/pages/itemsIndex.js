@@ -100,20 +100,26 @@ $(function() {
             //alert('Change'); 
             $('#tableItems').DataTable().destroy();
             $('#tableItems').DataTable({
+                //bSort: false,
+                "processing": true,
+                "serverSide": true,
                 lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
-                ajax: "/portalqualidade/items/itemsFound/" + $('#townhouses').val() + '/' + $('#towers').val()
+                "ajax": "/portalqualidade/items/itemsFound/" + $('#townhouses').val() + '/' + $('#towers').val()
             });
     });
         
 });
 
 function inputDataTable(){
+    //alert('ok');
     //popular tabela
     $('#tableItems').DataTable().destroy();
     $('#tableItems').DataTable({
         //bSort: false,
-        lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
-        ajax: "items/itemsFound/" + $('#townhouses').val() + '/' + $('#towers').val()
+        "processing": true,
+        "serverSide": true,
+        "lengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
+        "ajax": "items/itemsFound/" + $('#townhouses').val() + '/' + $('#towers').val()
     });         
 }
 

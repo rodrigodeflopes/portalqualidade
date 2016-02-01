@@ -11,37 +11,17 @@
 
 $(function() {
     
-    // Multiselects
-    // ------------------------------
+    // Override defaults selects
+    $.fn.selectpicker.defaults = {
+        iconBase: '',
+        tickIcon: 'icon-checkmark3'
+    };
+
+    // Basic select
+    $('.bootstrap-select').selectpicker();
     
-        $('#townhouses').multiselect({
-        nonSelectedText: 'Vazio...',
-        includeSelectAllOption: true,
-        enableFiltering: true,
-        templates: {
-            filter: '<li class="multiselect-item multiselect-filter"><i class="icon-search4"></i> <input class="form-control" type="text"></li>'
-        },
-        onSelectAll: function() {
-            $.uniform.update();
-        },
-        onChange: function(element, checked) {
-            
-        },
-        onInitialized: function(select, container) {
-            $.ajax({
-                type: 'post',
-                url: "/portalqualidade/items/searchSelects/1/1",  //trocar esta url pelo id do enterprise na sessão #################################################################################
-                contentType: "json",
-                traditional: true,
-                success: function (result) {
-                    //alert(result);                    
-                    var options = JSON.parse(result);
-                    $('#townhouses').multiselect('dataprovider', options);                                        
-                }
-            });
-        }
-    });
-    
+       
+        
     // Popovers
     // ------------------------------
 
@@ -74,6 +54,13 @@ $(function() {
 	}).on('show.bs.popover', function() {
 		//alert('Show event fired.')
 	});
+        
+    // Form Change
+    //----------------------------
+    
+        $('#ItemOverviewForm').change(function(){
+             $('#ItemOverviewForm').submit();
+        });
 
 	
 	
