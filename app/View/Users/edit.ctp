@@ -71,7 +71,7 @@
 
                                 <div class="list-group list-group-borderless no-padding-top">
                                         <a href="#" class="list-group-item"><i class=" icon-price-tag3"></i> Status <span class="<?php echo $this->request->data['UserStatus']['cssClass']; ?> pull-right"><?php echo $this->request->data['UserStatus']['name']; ?></span></a>
-                                        <a href="#" class="list-group-item"><i class="icon-laptop"></i> Último acesso <span class="pull-right"><?php echo h($this->Time->format('d/m/Y H:i', $this->request->data['User']['modified'])); ?></span></a>
+                                        <a href="#" class="list-group-item"><i class="icon-laptop"></i> Último acesso <span class="pull-right"><?php echo h($this->Time->format('d/m/Y H:i', $this->request->data['User']['last_access'])); ?></span></a>
                                 </div>
                         </div>
                         <!-- /navigation -->

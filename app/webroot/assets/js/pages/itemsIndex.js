@@ -104,7 +104,7 @@ $(function() {
                 "processing": true,
                 "serverSide": true,
                 lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
-                "ajax": "/portalqualidade/items/itemsFound/" + $('#townhouses').val() + '/' + $('#towers').val()
+                "ajax": "items/itemsFound/" + $('#townhouses').val() + '/' + $('#towers').val()
             });
     });
         

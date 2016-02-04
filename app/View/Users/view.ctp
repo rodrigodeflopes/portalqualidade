@@ -89,7 +89,7 @@
                                                                         </div>
                                                             
                                                                         <div class="form-group">
-                                                                            <label class="control-label col-lg-2"><i class=" icon-laptop"></i>&nbsp; Último acesso:</label> <span><?php echo h($this->Time->format('d/m/Y H:i', $user['User']['modified'])); ?></span>
+                                                                            <label class="control-label col-lg-2"><i class=" icon-laptop"></i>&nbsp; Último acesso:</label> <span><?php echo h($this->Time->format('d/m/Y H:i', $user['User']['last_access'])); ?></span>
                                                                         </div>
                                                                         
                                                                         <div class="text-right">

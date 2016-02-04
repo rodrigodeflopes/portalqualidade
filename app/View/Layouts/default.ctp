@@ -215,7 +215,7 @@
                                                                         <li class="navigation-header" style="margin-top: 50px;"><span>Em Desenvolvimento</span> <i class="icon-menu" title="Forms"></i></li>   
                                                                             <li class="disabled"><?php echo $this->Html->link('<i class="icon-stack4"></i> <span>Aprovações</span>', array('controller' => 'enterprises', 'action' => 'index'), array('escape' => false)); ?></li>
                                                                             <li class="disabled"><?php echo $this->Html->link('<i class="icon-file-eye2"></i> <span>Re-inspeções</span>', array('controller' => 'enterprises', 'action' => 'index'), array('escape' => false)); ?></li>
-                                                                            <li class="disabled"><?php echo $this->Html->link('<i class="icon-folder-open"></i> <span>Documentos8</span>', array('controller' => 'enterprises', 'action' => 'index'), array('escape' => false)); ?></li>
+                                                                            <li class="disabled"><?php echo $this->Html->link('<i class="icon-folder-open"></i> <span>Documentos</span>', array('controller' => 'enterprises', 'action' => 'index'), array('escape' => false)); ?></li>
                                                                         <!-- /Desenvolvimento -->
 
                                                                 </ul>

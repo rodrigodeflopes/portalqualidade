@@ -43,7 +43,7 @@
                                     <p>MUITA ATENÇÃO ao selecionar o bloco que será sincronizado com o Portal QualiTab.</p> 
                                     <p>A importação de dados do dispositivo para o portal ocorre apenas selecionando um bloco por vez. O Bloco selecionado para ser importado, será transmitido totalmente. Todas as FVS e verificações serão carregadas para o portal conforme estão salvas no seu dispositivo.</p>
                                     <hr>
-                                    <img src="/portalqualidade/img/qrcodeexample.jpg" width="300px">
+                                    <img src="/img/qrcodeexample.jpg" width="300px">
                                     <hr>
                                     <p>Mantenha sempre o portal QualiTab atualizado. E antes de iniciar as suas verificações em campo, certifique-se de que você está com seu dispositivo devidamente atualizado.</p>
                             </div>

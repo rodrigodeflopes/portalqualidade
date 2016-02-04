@@ -4,7 +4,14 @@
  * and open the template in the editor.
  */
 
-function inputDataTable(towerId, location2Id){
+function inputDataTable(towerId, keyName, id){
+    var url='';
+    if(keyName === 'Location1'){
+        url = "/portalqualidade/items/itemsFound/null/" + towerId + "/" + id;
+    }else if(keyName === 'Location2'){
+        url = "/portalqualidade/items/itemsFound/null/" + towerId + "/null/" + id;
+    }
+    
     //popular tabela
     $('#tableItems').DataTable().destroy();
     $('#tableItems').DataTable({
@@ -12,7 +19,7 @@ function inputDataTable(towerId, location2Id){
         "processing": true,
         "serverSide": true,
         "lengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
-        "ajax": "/portalqualidade/items/itemsFound/null/" + towerId + "/null/" + location2Id
+        "ajax": url
     });         
 }
 
@@ -20,7 +27,7 @@ function getPhoto(itemId){
         //alert(itemId);
         $.ajax({
             type: 'post',
-            url: '/portalqualidade/items/photoFound/' + itemId,
+            url: '/items/photoFound/' + itemId,
             contentType: "json",
             traditional: true,
             success: function (result) {
@@ -49,7 +56,7 @@ function getNote(itemId){
         //alert(itemId);
         $.ajax({
             type: 'post',
-            url: '/portalqualidade/items/noteFound/' + itemId,            
+            url: '/items/noteFound/' + itemId,            
             contentType: "json",
             traditional: true,
             success: function (result) {

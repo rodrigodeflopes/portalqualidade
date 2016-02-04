@@ -145,6 +145,7 @@ class ItemsController extends AppController {
             $result = array();
             foreach($towers as $tower) {   
                 
+                //Localizando Loc2 (Aptos / hall)
                 $items = $this->Item->query("
                     SELECT Location2.id, Location2.name, COUNT(Item.id) as total, SUM( IF(Item.lastChecked=1,1,0)) AS totalC, SUM( IF(Item.lastChecked=2,1,0)) AS totalNC
                     FROM location2s AS Location2  
@@ -156,11 +157,28 @@ class ItemsController extends AppController {
                     GROUP BY Item.location2_id
                     
                 ");
+                //debug($items);
+                
+                //Localizando Loc1 (Radier, Platibanda) 
+                $items2 = $this->Item->query("
+                    SELECT Location1.id, Location1.name, COUNT(Item.id) as total, SUM( IF(Item.lastChecked=1,1,0)) AS totalC, SUM( IF(Item.lastChecked=2,1,0)) AS totalNC
+                    FROM location1s AS Location1  
+                    
+                    LEFT JOIN items AS Item
+                    ON Item.location1_id = Location1.id
+                        
+                    WHERE Item.tower_id = " . $tower['Tower']['id'] . " 
+                    GROUP BY Item.location1_id
+                    
+                ");  
+                //debug($items2);
+                
                 
                 $result[] = array(
                     'towerId' => $tower['Tower']['id'],
                     'towerName' => $tower['Tower']['name'],
-                    'Item' => $items
+                    'Item' => $items,
+                    'Item2' => $items2
                 );
                 
             }
@@ -173,9 +191,9 @@ class ItemsController extends AppController {
  * overviewList method
  *
  */
-	public function overviewList($towerId, $location2Id) {    
+	public function overviewList($towerId, $keyName, $id) {    
             
-            $this->set(array('towerId' => $towerId, 'location2Id' => $location2Id));
+            $this->set(array('towerId' => $towerId, 'keyName' => $keyName, 'id' => $id));
             
         }
         

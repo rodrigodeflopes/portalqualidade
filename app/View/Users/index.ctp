@@ -62,7 +62,7 @@
                                                         <td><?php echo $this->Html->link(h($user['User']['name']), array('action'=>'view', $user['User']['id']), array('escape' => false)); ?></td>
                                                         <td><?php echo h($user['User']['email']); ?></td>
                                                         <td><?php echo h($this->Time->format('d/m/Y H:i:s', $user['User']['created'])); ?></td>
-                                                        <td><?php echo h($this->Time->format('d/m/Y H:i:s', $user['User']['modified'])); ?></td>
+                                                        <td><?php echo h($this->Time->format('d/m/Y H:i:s', $user['User']['last_access'])); ?></td>
                                                         <td><span class="<?php echo $user['UserStatus']['cssClass']; ?>"><?php echo $user['UserStatus']['name']; ?></span></td>
                                                 </tr>
                                         <?php endforeach; ?>

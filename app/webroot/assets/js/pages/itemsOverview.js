@@ -66,6 +66,6 @@ $(function() {
 	
 });
 
-function overView(towerId, location2_id){    
-        window.location.href = "overviewList/" + towerId + "/" + location2_id;        
+function overView(towerId, keyName, id){    
+        window.location.href = "overviewList/" + towerId + "/" + keyName + "/" + id;        
 }

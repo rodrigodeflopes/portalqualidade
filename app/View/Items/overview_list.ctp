@@ -152,6 +152,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        inputDataTable('<?php echo $towerId; ?>', '<?php echo $location2Id; ?>');
+        inputDataTable('<?php echo $towerId; ?>', '<?php echo $keyName; ?>', '<?php echo $id; ?>');
     });
 </script>
