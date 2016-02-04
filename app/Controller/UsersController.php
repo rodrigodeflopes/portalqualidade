@@ -370,7 +370,8 @@ class UsersController extends AppController {
         public function login() { 
             $this->layout='login';
             if ($this->request->is('post')) { 
-                if ($this->Auth->login()) {  
+                if ($this->Auth->login()) { 
+                    $this->User->save(array('User' => array('id' => $this->Session->read('Auth.User.id'), 'last_access' => date('Y-m-d H:i:s'))));
                     $this->redirect($this->Auth->redirect()); 
                 } else { 
                     $this->Session->setFlash('E-mail ou senha incorretos.','alert_error'); 
@@ -384,8 +385,7 @@ class UsersController extends AppController {
  * 
  */        
         public function logout() { 
-                //$this->Session->setFlash('Usuário desconectado!','alert_success'); 
-                $this->User->save(array('User' => array('id' => $this->Session->read('Auth.User.id'), 'last_access' => date('Y-m-d H:i:s'))));
+                //$this->Session->setFlash('Usuário desconectado!','alert_success');                 
                 $this->Session->destroy();
                 $this->redirect($this->Auth->logout()); 
         } 

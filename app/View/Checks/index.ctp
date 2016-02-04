@@ -40,7 +40,7 @@
                         </div>
                 </div>
 
-                <table class="table tasks-list table-striped">
+                <table class="table tasks-list">
                         <thead>
                                 <tr>
                                         <th>#</th>

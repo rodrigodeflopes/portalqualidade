@@ -43,7 +43,7 @@
         <!-- Basic thumbnails -->
         <div class="row">
                 <?php foreach ($items as $item): ?>
-                        <div style="margin-left: 20px; width: 400px;" class="pull-left">
+                        <div style="margin-left: 20px; width: 360px;" class="pull-left">
                                 <div class="panel panel-flat">
                                         <div class="panel-heading">
                                                 <h4><?php echo $item['towerName'] ?></h4>
@@ -62,8 +62,10 @@
                                                         <table class="table table-xxs table-columned">
                                                                 <tbody>
                                                                         <tr>
+                                                                                <?php echo $this->element('cellOverview', array('array' => $item, 'key' => 'Item2', 'keyName' => 'Location1', 'pointer' => 0, 'name' => 'FACHADA', 'attribute' => 'colspan="6"')); ?>
+                                                                        </tr>
+                                                                        <tr>
                                                                                 <?php echo $this->element('cellOverview', array('array' => $item, 'key' => 'Item2', 'keyName' => 'Location1', 'pointer' => 8, 'name' => 'TELHADO', 'attribute' => 'colspan="6"')); ?>
-                                                                                <?php echo $this->element('cellOverview', array('array' => $item, 'key' => 'Item2', 'keyName' => 'Location1', 'pointer' => 0, 'name' => '<div class="verticalText">BLOCO</div>', 'attribute' => 'rowspan="6"')); ?>
                                                                         </tr>
                                                                         <tr>
                                                                                 <?php echo $this->element('cellOverview', array('array' => $item, 'key' => 'Item2', 'keyName' => 'Location1', 'pointer' => 6, 'name' => 'PLATIBANDA', 'attribute' => 'colspan="6"')); ?>
